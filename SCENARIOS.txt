@@ -1,3 +1,12 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>무림파천</title>
+</head>
+<body style="margin: 0; padding: 10px; background-color: #f4f4f4;">
+
 <p style="margin:0;padding:0;width:100%;max-width:800px;background:#0a0a0a;position:relative;overflow:hidden;font-family:'Noto Serif KR',serif;"><span style="display:block;width:100%;height:100%;position:relative;"><span style="display:block;width:100%;padding-top:40px;padding-bottom:30px;background:linear-gradient(180deg,#1a0000 0%,#0d0d0d 70%,#0a0a0a 100%);position:relative;overflow:hidden;border-bottom:1px solid #331111;"><span style="display:block;position:absolute;top:0;left:0;width:100%;height:100%;background:url('https://www.transparenttextures.com/patterns/dark-matter.png');opacity:0.3;"></span><span style="display:block;width:90%;margin:0 auto;text-align:center;position:relative;"><span style="display:block;font-size:11px;letter-spacing:8px;color:#8b0000;opacity:0.8;animation:pulse 3s infinite;">MAIN SCENARIO & TIMELINE</span><span style="display:block;margin-top:14px;font-size:32px;font-weight:900;color:#e8e0d4;text-shadow:0 0 20px rgba(139,0,0,0.5),0 2px 4px rgba(0,0,0,0.8);letter-spacing:2px;">비극의 서막과 무림파천</span><span style="display:block;margin-top:20px;width:60px;height:2px;background:linear-gradient(90deg,transparent,#d0b070,transparent);margin-left:auto;margin-right:auto;"></span></span></span>
 
 <span style="display:block;width:90%;margin:30px auto;padding:20px;box-sizing:border-box;background:linear-gradient(160deg,#110a0a,#050505);border:1px solid #2a1a1a;border-radius:4px;box-shadow:0 0 20px rgba(139,0,0,0.1);"><span style="display:block;text-align:center;margin-bottom:20px;"><span style="display:block;font-size:16px;color:#d0b070;font-weight:900;letter-spacing:2px;">제 1장 : 진실과 기만</span></span><span style="display:block;font-size:13px;color:#c4b8a8;line-height:2;"><span style="display:block;margin-bottom:15px;">세상이 기억하는 천마(天魔) <b style="color:#fff;">혁련강</b>의 혼인은 핏빛 납치극이었다. 무림을 피로 물들이던 마두가 사천당가의 고명딸을 억지로 취했다는 것이 정파의 기록이었다.</span><span style="display:block;margin-bottom:15px;">하지만 진실은 달랐다. 당가의 여식은 혁련강의 투박하지만 거짓 없는 진심에 반한 것은 오히려 그녀였고, 납치는 그녀가 주도한 <b style="color:#c0392b;">사랑의 도피</b>였다. 그녀 스스로 십만대산의 안주인이 되기를 택했다. 당가 역시 겉으로는 마교를 규탄했으나, 가주 <b style="color:#d0b070;">당천학</b>만은 진실을 알고 있었다. 딸을 훔쳐 간 도둑놈을 베겠다며 비밀리에 혁련강을 찾아갔던 날, 당천학은 으름장을 놓았다.</span></span><span style="display:block;margin:20px 0;padding:15px;background:linear-gradient(90deg,rgba(139,0,0,0.15),transparent);border-left:3px solid #8b0000;"><span style="display:block;font-size:14px;color:#e8e0d4;font-weight:bold;line-height:1.6;font-style:italic;">"내 딸의 눈에서 눈물이 단 한 방울이라도 흐른다면, 사천의 모든 독을 풀어 십만대산을 지옥으로 만들어 주마."</span></span><span style="display:block;font-size:13px;color:#c4b8a8;line-height:2;"><span style="display:block;margin-bottom:15px;">그러나 정작 혁련강이 묵묵히 내어온 최고급 독주에 취해, 그날 밤 두 사람은 사위와 장인으로서 허심탄회하게 술잔을 부딪쳤다.</span><span style="display:block;margin-bottom:15px;">그러나 그 행복은 너무도 짧았다. 아내는 혁소천을 낳고 얼마 지나지 않아 요절했다. 모두가 마교의 음기가 그녀를 갉아먹은 것이라 여겼고, 혁련강조차 자신을 원망했다. 그것이 정파 연합에서 암암리에 보낸 자객의 지효성 맹독 때문이었음을, 회귀 전의 그는 꿈에도 알지 못했다.</span><span style="display:block;margin-bottom:15px;">정파 연합은 아내의 죽음을 철저히 이용했다. 무림맹주 <b style="color:#fff;">제갈현</b>은 "천마가 당가의 여식을 죽였다"는 헛소문을 퍼뜨려 사천당가를 고립시켰다. 진실을 알면서도 무림 공적이라는 명분 앞에 묶여버린 당천학은, 텅 빈 전각에서 홀로 피눈물을 삼키며 침묵해야만 했다.</span></span></span>
@@ -59,3 +68,7 @@
 
 </span>
 </span></p>
+
+
+    </body>
+</html>
