@@ -1,0 +1,1608 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#ff4fa3">
+  <meta name="description" content="결혼식을 앞둔 네 소꿉친구의 대환장 총각파티 캐릭터 소개 페이지">
+  <title>결혼식을 앞둔 소꿉친구들의 대환장 총각파티</title>
+  <style>
+    :root {
+      --ink: #251c38;
+      --muted: #746c84;
+      --paper: #ffffff;
+      --pink: #ff4fa3;
+      --pink-soft: #fff0f7;
+      --violet: #8468ff;
+      --cyan: #21d9e7;
+      --yellow: #ffd85a;
+      --lime: #b9f45f;
+      --night: #1f1733;
+      --line: rgba(37, 28, 56, 0.12);
+      --shadow: 0 18px 42px rgba(92, 60, 126, 0.14);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background: #fff;
+    }
+
+    body {
+      margin: 0;
+      min-width: 280px;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 8% 2%, rgba(255, 79, 163, 0.11), transparent 20rem),
+        radial-gradient(circle at 96% 22%, rgba(33, 217, 231, 0.11), transparent 18rem),
+        #fff;
+      font-family: Pretendard, "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif;
+      font-size: 16px;
+      line-height: 1.65;
+      word-break: keep-all;
+      overflow-wrap: anywhere;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    button,
+    a {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .page {
+      position: relative;
+      width: min(100%, 450px);
+      margin: 0 auto;
+      padding: 14px 14px 48px;
+      background: rgba(255, 255, 255, 0.9);
+      overflow: hidden;
+    }
+
+    .page::before,
+    .page::after {
+      position: absolute;
+      z-index: 0;
+      width: 150px;
+      height: 150px;
+      border: 2px solid rgba(132, 104, 255, 0.12);
+      border-radius: 50%;
+      content: "";
+      pointer-events: none;
+    }
+
+    .page::before {
+      top: 490px;
+      right: -100px;
+    }
+
+    .page::after {
+      top: 1780px;
+      left: -115px;
+      border-color: rgba(255, 79, 163, 0.13);
+    }
+
+    main,
+    header,
+    footer,
+    nav {
+      position: relative;
+      z-index: 1;
+    }
+
+    .invitation {
+      position: relative;
+      padding: 12px;
+      border: 1px solid rgba(255, 79, 163, 0.36);
+      border-radius: 28px;
+      background: rgba(255, 255, 255, 0.96);
+      box-shadow: var(--shadow);
+      isolation: isolate;
+    }
+
+    .invitation::before {
+      position: absolute;
+      inset: 7px;
+      z-index: -1;
+      border: 1px dashed rgba(132, 104, 255, 0.28);
+      border-radius: 22px;
+      content: "";
+    }
+
+    .invite-inner {
+      padding: 28px 18px 22px;
+      text-align: center;
+      background:
+        radial-gradient(circle at 12% 10%, rgba(255, 216, 90, 0.6) 0 3px, transparent 4px),
+        radial-gradient(circle at 88% 14%, rgba(33, 217, 231, 0.5) 0 3px, transparent 4px),
+        radial-gradient(circle at 8% 72%, rgba(132, 104, 255, 0.38) 0 2px, transparent 3px),
+        radial-gradient(circle at 92% 78%, rgba(255, 79, 163, 0.45) 0 3px, transparent 4px);
+      border-radius: 18px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin: 0 0 15px;
+      color: var(--pink);
+      font-size: 0.75rem;
+      font-weight: 900;
+      letter-spacing: 0.16em;
+    }
+
+    .eyebrow::before,
+    .eyebrow::after {
+      width: 24px;
+      height: 1px;
+      background: currentColor;
+      content: "";
+    }
+
+    h1 {
+      margin: 0;
+      line-height: 1.14;
+      letter-spacing: -0.055em;
+    }
+
+    h1 span,
+    h1 strong,
+    h1 em {
+      display: block;
+      font-style: normal;
+    }
+
+    h1 span {
+      margin-bottom: 5px;
+      color: #695d7d;
+      font-family: "Nanum Myeongjo", "Batang", serif;
+      font-size: 1.08rem;
+      font-weight: 700;
+      letter-spacing: -0.025em;
+    }
+
+    h1 strong {
+      font-size: clamp(2rem, 9vw, 2.65rem);
+      font-weight: 950;
+    }
+
+    h1 em {
+      margin-top: 5px;
+      color: transparent;
+      background: linear-gradient(90deg, var(--pink), var(--violet) 52%, #08bccc);
+      -webkit-background-clip: text;
+      background-clip: text;
+      font-size: clamp(2.05rem, 9.5vw, 2.8rem);
+      font-weight: 950;
+      text-shadow: 0 8px 26px rgba(255, 79, 163, 0.15);
+    }
+
+    .invitee {
+      width: fit-content;
+      margin: 22px auto 13px;
+      padding: 7px 13px;
+      border-radius: 999px;
+      color: #5a476d;
+      background: linear-gradient(90deg, #fff0f8, #f1efff);
+      font-size: 0.88rem;
+      font-weight: 800;
+    }
+
+    .invite-copy {
+      margin: 0 auto;
+      color: #5f576c;
+      font-size: 0.98rem;
+      line-height: 1.72;
+    }
+
+    .invite-copy b {
+      color: var(--ink);
+    }
+
+    .party-ticket {
+      position: relative;
+      margin-top: 20px;
+      padding: 16px 14px;
+      border-radius: 17px;
+      color: #fff;
+      background:
+        linear-gradient(135deg, rgba(255,255,255,0.06), transparent 42%),
+        var(--night);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.08);
+      overflow: hidden;
+    }
+
+    .party-ticket::after {
+      position: absolute;
+      top: -50px;
+      right: -22px;
+      width: 105px;
+      height: 105px;
+      border: 16px solid rgba(33, 217, 231, 0.09);
+      border-radius: 50%;
+      content: "";
+    }
+
+    .ticket-label {
+      margin: 0 0 8px;
+      color: var(--cyan);
+      font-size: 0.72rem;
+      font-weight: 900;
+      letter-spacing: 0.14em;
+    }
+
+    .ticket-title {
+      margin: 0;
+      font-size: 1.07rem;
+      font-weight: 900;
+    }
+
+    .ticket-meta {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 6px;
+      margin-top: 10px;
+    }
+
+    .ticket-meta span {
+      padding: 5px 9px;
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 999px;
+      color: rgba(255,255,255,0.82);
+      font-size: 0.75rem;
+      font-weight: 750;
+    }
+
+    .scroll-cue {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 18px;
+      color: #55496a;
+      font-size: 0.83rem;
+      font-weight: 850;
+      text-decoration: none;
+    }
+
+    .scroll-cue i {
+      display: grid;
+      width: 28px;
+      height: 28px;
+      place-items: center;
+      border-radius: 50%;
+      color: white;
+      background: linear-gradient(135deg, var(--pink), var(--violet));
+      font-style: normal;
+      box-shadow: 0 5px 16px rgba(132, 104, 255, 0.28);
+      animation: bob 1.8s ease-in-out infinite;
+    }
+
+    .cast-nav {
+      position: sticky;
+      top: 8px;
+      z-index: 20;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 6px;
+      margin: 18px 0 26px;
+      padding: 7px;
+      border: 1px solid rgba(132, 104, 255, 0.16);
+      border-radius: 17px;
+      background: rgba(255,255,255,0.88);
+      box-shadow: 0 10px 30px rgba(61, 37, 87, 0.12);
+      backdrop-filter: blur(14px);
+    }
+
+    .cast-nav a {
+      padding: 9px 2px;
+      border-radius: 11px;
+      color: #615670;
+      font-size: 0.78rem;
+      font-weight: 900;
+      text-align: center;
+      text-decoration: none;
+      transition: transform 160ms ease, color 160ms ease, background 160ms ease;
+    }
+
+    .cast-nav a:hover,
+    .cast-nav a:focus-visible {
+      color: white;
+      background: linear-gradient(135deg, var(--pink), var(--violet));
+      outline: none;
+      transform: translateY(-2px);
+    }
+
+    .section-kicker {
+      margin: 0;
+      color: var(--pink);
+      font-size: 0.75rem;
+      font-weight: 950;
+      letter-spacing: 0.15em;
+    }
+
+    .section-title {
+      margin: 4px 0 8px;
+      font-size: 1.48rem;
+      line-height: 1.3;
+      letter-spacing: -0.04em;
+    }
+
+    .section-copy {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
+    .premise {
+      margin-bottom: 28px;
+      padding: 4px 5px 0;
+    }
+
+    .warning-note {
+      margin-top: 15px;
+      padding: 12px 13px;
+      border-left: 4px solid var(--yellow);
+      border-radius: 4px 13px 13px 4px;
+      color: #50465f;
+      background: #fffbed;
+      font-size: 0.86rem;
+      font-weight: 750;
+    }
+
+    .groom-card {
+      --accent: var(--pink);
+      --accent-2: var(--violet);
+      --tint: var(--pink-soft);
+      position: relative;
+      margin: 0 0 32px;
+      padding: 8px;
+      scroll-margin-top: 82px;
+      border: 1px solid color-mix(in srgb, var(--accent) 28%, white);
+      border-radius: 28px;
+      background: white;
+      box-shadow: var(--shadow);
+    }
+
+    .groom-card.garam {
+      --accent: #29c994;
+      --accent-2: #45a7ff;
+      --tint: #effff9;
+    }
+
+    .groom-card.ikyul {
+      --accent: #8d6cff;
+      --accent-2: #ff70bd;
+      --tint: #f5f1ff;
+    }
+
+    .groom-card.jayden {
+      --accent: #ff904d;
+      --accent-2: #ff4f8f;
+      --tint: #fff5ed;
+    }
+
+    .portrait-frame {
+      position: relative;
+      aspect-ratio: 4 / 4.8;
+      border-radius: 21px 21px 15px 15px;
+      background: linear-gradient(135deg, var(--tint), #f5f1ff);
+      overflow: hidden;
+    }
+
+    .portrait-frame::before {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background: linear-gradient(180deg, transparent 48%, rgba(24, 15, 43, 0.86) 100%);
+      content: "";
+      pointer-events: none;
+    }
+
+    .portrait-frame.is-error::after {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      padding: 30px;
+      color: var(--accent);
+      background: linear-gradient(135deg, var(--tint), #fff);
+      content: attr(data-fallback);
+      font-size: 1.5rem;
+      font-weight: 950;
+      text-align: center;
+    }
+
+    .portrait-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+    }
+
+    .portrait-frame.is-error img {
+      display: none;
+    }
+
+    .sticker {
+      position: absolute;
+      top: 15px;
+      left: 14px;
+      z-index: 3;
+      padding: 7px 12px;
+      border: 2px solid rgba(255,255,255,0.82);
+      border-radius: 999px;
+      color: white;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      box-shadow: 0 7px 18px rgba(31, 23, 51, 0.22);
+      font-size: 0.8rem;
+      font-weight: 950;
+      transform: rotate(-4deg);
+    }
+
+    .portrait-title {
+      position: absolute;
+      right: 18px;
+      bottom: 17px;
+      left: 18px;
+      z-index: 2;
+      color: white;
+    }
+
+    .portrait-title .role {
+      display: block;
+      margin-bottom: 2px;
+      color: color-mix(in srgb, var(--accent) 55%, white);
+      font-size: 0.78rem;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+    }
+
+    .portrait-title h2 {
+      margin: 0;
+      font-size: 2.1rem;
+      line-height: 1.1;
+      letter-spacing: -0.05em;
+    }
+
+    .card-body {
+      padding: 19px 13px 13px;
+    }
+
+    .one-liner {
+      margin: 0 0 13px;
+      color: #332743;
+      font-size: 1.04rem;
+      font-weight: 900;
+      line-height: 1.5;
+    }
+
+    .profile-line {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 15px;
+    }
+
+    .profile-line span {
+      padding: 5px 9px;
+      border: 1px solid color-mix(in srgb, var(--accent) 25%, white);
+      border-radius: 999px;
+      color: #53465f;
+      background: var(--tint);
+      font-size: 0.75rem;
+      font-weight: 850;
+    }
+
+    .bio {
+      margin: 0;
+      color: #655b70;
+      font-size: 0.92rem;
+      line-height: 1.76;
+    }
+
+    .trait-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin: 17px 0;
+    }
+
+    .trait {
+      min-height: 96px;
+      padding: 12px;
+      border: 1px solid rgba(37, 28, 56, 0.08);
+      border-radius: 15px;
+      background: #fff;
+      box-shadow: 0 7px 18px rgba(57, 38, 76, 0.06);
+    }
+
+    .trait b {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--accent);
+      font-size: 0.73rem;
+      font-weight: 950;
+      letter-spacing: 0.04em;
+    }
+
+    .trait span {
+      display: block;
+      color: #564b61;
+      font-size: 0.83rem;
+      font-weight: 700;
+      line-height: 1.55;
+    }
+
+    .party-mode {
+      position: relative;
+      margin: 4px 0 18px;
+      padding: 15px 15px 15px 17px;
+      border-radius: 16px;
+      color: #fff;
+      background: var(--night);
+      overflow: hidden;
+    }
+
+    .party-mode::before {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      width: 4px;
+      background: linear-gradient(var(--accent), var(--accent-2));
+      content: "";
+      box-shadow: 0 0 13px var(--accent);
+    }
+
+    .party-mode b {
+      display: block;
+      margin-bottom: 3px;
+      color: var(--accent);
+      font-size: 0.75rem;
+      font-weight: 950;
+      letter-spacing: 0.1em;
+    }
+
+    .party-mode p {
+      margin: 0;
+      color: rgba(255,255,255,0.86);
+      font-size: 0.87rem;
+      font-weight: 700;
+    }
+
+    .bride-card {
+      display: grid;
+      grid-template-columns: 84px minmax(0, 1fr);
+      gap: 12px;
+      align-items: start;
+      padding: 12px;
+      border: 1px solid color-mix(in srgb, var(--accent) 22%, white);
+      border-radius: 18px;
+      background: linear-gradient(135deg, var(--tint), #fff 72%);
+    }
+
+    .bride-image {
+      position: relative;
+      aspect-ratio: 1 / 1.24;
+      border: 3px solid white;
+      border-radius: 15px;
+      background: #f4eef7;
+      box-shadow: 0 7px 18px rgba(50, 31, 69, 0.13);
+      overflow: hidden;
+    }
+
+    .bride-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+    }
+
+    .bride-image.is-error::after {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      padding: 8px;
+      color: var(--accent);
+      background: var(--tint);
+      content: attr(data-fallback);
+      font-size: 0.76rem;
+      font-weight: 900;
+      text-align: center;
+    }
+
+    .bride-image.is-error img {
+      display: none;
+    }
+
+    .bride-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      margin-bottom: 3px;
+      color: var(--accent);
+      font-size: 0.68rem;
+      font-weight: 950;
+      letter-spacing: 0.09em;
+    }
+
+    .bride-label::before {
+      content: "♡";
+      font-size: 0.9rem;
+    }
+
+    .bride-name {
+      margin: 0 0 2px;
+      font-size: 1.1rem;
+      line-height: 1.25;
+      letter-spacing: -0.025em;
+    }
+
+    .bride-meta {
+      display: block;
+      margin-bottom: 7px;
+      color: #695e73;
+      font-size: 0.73rem;
+      font-weight: 800;
+    }
+
+    .bride-copy {
+      margin: 0;
+      color: #5f5568;
+      font-size: 0.78rem;
+      line-height: 1.58;
+    }
+
+    .secret {
+      display: block;
+      margin-top: 7px;
+      padding: 7px 8px;
+      border: 1px dashed rgba(255, 79, 105, 0.38);
+      border-radius: 9px;
+      color: #7d304b;
+      background: #fff5f7;
+      font-size: 0.72rem;
+      font-weight: 800;
+      line-height: 1.52;
+    }
+
+    .final-invite {
+      position: relative;
+      margin-top: 8px;
+      padding: 24px 18px;
+      border-radius: 24px;
+      color: white;
+      background:
+        radial-gradient(circle at 10% 12%, rgba(255,79,163,0.32), transparent 30%),
+        radial-gradient(circle at 90% 90%, rgba(33,217,231,0.24), transparent 32%),
+        var(--night);
+      box-shadow: 0 18px 40px rgba(31,23,51,0.2);
+      overflow: hidden;
+    }
+
+    .final-invite::after {
+      position: absolute;
+      top: 14px;
+      right: 16px;
+      color: var(--yellow);
+      content: "✦";
+      font-size: 2.1rem;
+      filter: drop-shadow(0 0 8px rgba(255,216,90,0.75));
+      animation: twinkle 1.9s ease-in-out infinite;
+    }
+
+    .final-invite .section-kicker {
+      color: var(--cyan);
+    }
+
+    .final-invite .section-title {
+      max-width: 315px;
+      margin-bottom: 12px;
+      font-size: 1.55rem;
+    }
+
+    .final-invite p {
+      margin: 0;
+      color: rgba(255,255,255,0.8);
+      font-size: 0.91rem;
+      line-height: 1.72;
+    }
+
+    .final-invite strong {
+      color: #fff;
+    }
+
+    .final-points {
+      display: grid;
+      gap: 7px;
+      margin-top: 16px;
+    }
+
+    .final-points span {
+      padding: 9px 11px;
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 11px;
+      color: #fff;
+      background: rgba(255,255,255,0.055);
+      font-size: 0.82rem;
+      font-weight: 800;
+    }
+
+    .player-guide {
+      position: relative;
+      margin-top: 34px;
+      padding: 8px;
+      scroll-margin-top: 82px;
+      border: 1px solid rgba(132, 104, 255, 0.28);
+      border-radius: 28px;
+      background:
+        linear-gradient(#fff, #fff) padding-box,
+        linear-gradient(135deg, var(--pink), var(--violet), var(--cyan)) border-box;
+      box-shadow: var(--shadow);
+    }
+
+    .guide-hero {
+      position: relative;
+      padding: 25px 18px 22px;
+      border-radius: 20px;
+      color: white;
+      background:
+        radial-gradient(circle at 8% 0%, rgba(255,79,163,0.38), transparent 34%),
+        radial-gradient(circle at 100% 95%, rgba(33,217,231,0.28), transparent 40%),
+        var(--night);
+      overflow: hidden;
+    }
+
+    .guide-hero::after {
+      position: absolute;
+      top: 12px;
+      right: 15px;
+      color: var(--yellow);
+      content: "♡ ✦ ♡";
+      font-size: 0.92rem;
+      font-weight: 900;
+      letter-spacing: 0.1em;
+      filter: drop-shadow(0 0 7px rgba(255,216,90,0.65));
+    }
+
+    .guide-eyebrow {
+      margin: 0 0 4px;
+      color: var(--cyan);
+      font-size: 0.76rem;
+      font-weight: 950;
+      letter-spacing: 0.16em;
+    }
+
+    .guide-hero h2 {
+      margin: 0;
+      font-size: 2.05rem;
+      line-height: 1.15;
+      letter-spacing: -0.05em;
+    }
+
+    .guide-hero > p:last-of-type {
+      margin: 10px 0 0;
+      color: rgba(255,255,255,0.78);
+      font-size: 0.9rem;
+      line-height: 1.65;
+    }
+
+    .adult-badge {
+      display: inline-flex;
+      margin-top: 14px;
+      padding: 6px 10px;
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 999px;
+      color: #fff;
+      background: rgba(255,255,255,0.07);
+      font-size: 0.76rem;
+      font-weight: 850;
+    }
+
+    .guide-content {
+      padding: 19px 10px 12px;
+    }
+
+    .guide-heading {
+      display: grid;
+      grid-template-columns: 42px minmax(0, 1fr);
+      gap: 10px;
+      align-items: center;
+      margin: 0 1px 13px;
+    }
+
+    .guide-heading:not(:first-child) {
+      margin-top: 28px;
+    }
+
+    .guide-number {
+      display: grid;
+      width: 42px;
+      height: 42px;
+      place-items: center;
+      border-radius: 14px;
+      color: white;
+      background: linear-gradient(135deg, var(--pink), var(--violet));
+      box-shadow: 0 7px 18px rgba(132,104,255,0.23);
+      font-size: 0.78rem;
+      font-weight: 950;
+    }
+
+    .guide-heading h3 {
+      margin: 0;
+      font-size: 1.24rem;
+      line-height: 1.25;
+      letter-spacing: -0.035em;
+    }
+
+    .guide-heading p {
+      margin: 2px 0 0;
+      color: var(--muted);
+      font-size: 0.78rem;
+      font-weight: 700;
+    }
+
+    .role-list {
+      display: grid;
+      gap: 8px;
+    }
+
+    .role-card {
+      --role-color: var(--pink);
+      display: grid;
+      grid-template-columns: 34px minmax(0, 1fr);
+      gap: 10px;
+      align-items: start;
+      padding: 12px;
+      border: 1px solid rgba(37,28,56,0.09);
+      border-radius: 15px;
+      background: linear-gradient(100deg, color-mix(in srgb, var(--role-color) 8%, white), white 62%);
+      box-shadow: 0 6px 16px rgba(57,38,76,0.055);
+    }
+
+    .role-card:nth-child(3n + 2) {
+      --role-color: var(--violet);
+    }
+
+    .role-card:nth-child(3n) {
+      --role-color: #00bfcf;
+    }
+
+    .role-no {
+      display: grid;
+      width: 34px;
+      height: 34px;
+      place-items: center;
+      border-radius: 11px;
+      color: white;
+      background: var(--role-color);
+      font-size: 0.72rem;
+      font-weight: 950;
+      box-shadow: 0 5px 12px color-mix(in srgb, var(--role-color) 24%, transparent);
+    }
+
+    .role-title {
+      display: block;
+      margin-bottom: 2px;
+      color: #352743;
+      font-size: 0.92rem;
+      font-weight: 950;
+      line-height: 1.4;
+    }
+
+    .role-copy {
+      display: block;
+      color: #6c6176;
+      font-size: 0.875rem;
+      line-height: 1.55;
+    }
+
+    .play-groups {
+      display: grid;
+      gap: 13px;
+    }
+
+    .play-group {
+      padding: 13px;
+      border: 1px solid rgba(37,28,56,0.09);
+      border-radius: 17px;
+      background: #fff;
+      box-shadow: 0 7px 20px rgba(57,38,76,0.06);
+    }
+
+    .play-group h4 {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin: 0 0 10px;
+      color: #40334f;
+      font-size: 0.9rem;
+      line-height: 1.35;
+    }
+
+    .play-group h4::before {
+      width: 8px;
+      height: 8px;
+      flex: 0 0 auto;
+      border-radius: 50%;
+      background: var(--pink);
+      box-shadow: 0 0 10px rgba(255,79,163,0.75);
+      content: "";
+    }
+
+    .play-group:nth-child(2) h4::before {
+      background: var(--violet);
+      box-shadow: 0 0 10px rgba(132,104,255,0.75);
+    }
+
+    .play-group:nth-child(3) h4::before {
+      background: var(--cyan);
+      box-shadow: 0 0 10px rgba(33,217,231,0.75);
+    }
+
+    .play-group:nth-child(4) h4::before {
+      background: var(--yellow);
+      box-shadow: 0 0 10px rgba(255,216,90,0.75);
+    }
+
+    .play-list {
+      display: grid;
+      gap: 7px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .play-list li {
+      display: grid;
+      grid-template-columns: 29px minmax(0, 1fr);
+      gap: 8px;
+      align-items: start;
+      padding: 8px 0;
+      border-top: 1px dashed rgba(37,28,56,0.1);
+      color: #5c5168;
+      font-size: 0.875rem;
+      font-weight: 720;
+      line-height: 1.55;
+    }
+
+    .play-list li:first-child {
+      padding-top: 0;
+      border-top: 0;
+    }
+
+    .play-list li::before {
+      display: grid;
+      width: 27px;
+      height: 27px;
+      place-items: center;
+      border-radius: 9px;
+      color: var(--violet);
+      background: #f3f0ff;
+      content: attr(data-no);
+      font-size: 0.67rem;
+      font-weight: 950;
+    }
+
+    .play-list strong {
+      color: #392d47;
+      font-weight: 900;
+    }
+
+    .unlock {
+      display: inline-flex;
+      margin-left: 3px;
+      padding: 2px 6px;
+      border-radius: 999px;
+      color: #8b315c;
+      background: #ffe8f3;
+      font-size: 0.65rem;
+      font-weight: 950;
+      vertical-align: 1px;
+    }
+
+    .guide-tip {
+      margin: 17px 0 0;
+      padding: 13px 14px;
+      border: 1px dashed rgba(132,104,255,0.32);
+      border-radius: 14px;
+      color: #5e526b;
+      background: linear-gradient(100deg, #fff3f9, #f5f3ff);
+      font-size: 0.875rem;
+      font-weight: 750;
+      line-height: 1.6;
+    }
+
+    .guide-tip b {
+      color: var(--pink);
+    }
+
+    footer {
+      padding: 30px 8px 2px;
+      color: #8a8192;
+      font-size: 0.72rem;
+      font-weight: 750;
+      text-align: center;
+      letter-spacing: 0.08em;
+    }
+
+    footer b {
+      display: block;
+      margin-bottom: 3px;
+      color: var(--pink);
+      font-size: 0.82rem;
+      letter-spacing: 0.14em;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 560ms ease, transform 560ms ease;
+    }
+
+    .reveal.is-visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    @keyframes bob {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(4px); }
+    }
+
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.65; transform: rotate(0deg) scale(0.9); }
+      50% { opacity: 1; transform: rotate(12deg) scale(1.08); }
+    }
+
+    @media (max-width: 355px) {
+      .page {
+        padding-right: 9px;
+        padding-left: 9px;
+      }
+
+      .invite-inner {
+        padding-right: 12px;
+        padding-left: 12px;
+      }
+
+      .trait-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .bride-card {
+        grid-template-columns: 72px minmax(0, 1fr);
+        gap: 9px;
+        padding: 10px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+
+      .reveal {
+        opacity: 1;
+        transform: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="invitation">
+      <div class="invite-inner">
+        <p class="eyebrow">BACHELOR PARTY INVITATION</p>
+        <h1>
+          <span>결혼식을 앞둔</span>
+          <strong>소꿉친구들의</strong>
+          <em>대환장 총각파티</em>
+        </h1>
+
+        <p class="invitee">청첩장을 받으신 𝐔𝐒𝐄𝐑 님께</p>
+        <p class="invite-copy">
+          같은 동네에서 자라 목욕탕까지 함께 다니던 네 악우가<br>
+          어쩌다 보니 <b>합동 결혼식</b>을 올리게 됐습니다.<br>
+          마지막 밤만큼은 얌전히 보내자고 모였는데…<br>
+          이 말을 믿는 사람은 아무도 없습니다.
+        </p>
+
+        <div class="party-ticket">
+          <p class="ticket-label">ADMIT ONE · 결혼 전야</p>
+          <p class="ticket-title">우정 20년+ / 예비신랑 4명 / 이성 0명</p>
+          <div class="ticket-meta">
+            <span>드레스 코드: 생존</span>
+            <span>사고 확률: 100%</span>
+            <span>귀가 보장: 없음</span>
+          </div>
+        </div>
+
+        <a class="scroll-cue" href="#story" aria-label="등장인물 소개로 이동">
+          신랑 후보(?) 확인하기 <i aria-hidden="true">↓</i>
+        </a>
+      </div>
+    </header>
+
+    <nav class="cast-nav" aria-label="등장인물 바로가기">
+      <a href="#jaehee">재희</a>
+      <a href="#garam">가람</a>
+      <a href="#ikyul">이결</a>
+      <a href="#jayden">제이든</a>
+      <a href="#player-guide">가이드</a>
+    </nav>
+
+    <main id="story">
+      <section class="premise reveal">
+        <p class="section-kicker">TONIGHT'S DISASTER</p>
+        <h2 class="section-title">멀쩡한 놈이 단 한 명도 없다</h2>
+        <p class="section-copy">
+          나이는 제각각이지만 유년 시절부터 모든 흑역사를 공유한 찐친 넷.
+          주동자가 판을 벌이고, 배우가 생중계를 켜고, 도련님은 진지하게 헛소리하고,
+          막내는 예비신부 눈치를 본다. 그리고 그 한가운데에 𝐔𝐒𝐄𝐑가 있다.
+        </p>
+        <p class="warning-note">※ 네 사람의 우정은 튼튼합니다. 결혼 계획까지 튼튼한지는 아직 모릅니다.</p>
+      </section>
+
+      <article class="groom-card jaehee reveal" id="jaehee">
+        <div class="portrait-frame" data-fallback="송재희 이미지">
+          <img src="https://d394jeh9729epj.cloudfront.net/situations/images/6a9b2e34585f852fd43fe9de/6a9c0da24e1b67b769d8f4bb" alt="송재희 캐릭터 이미지">
+          <span class="sticker">멀또 · 멀쩡한 또라이</span>
+          <div class="portrait-title">
+            <span class="role">GROOM 01 · 천만배우</span>
+            <h2>송재희</h2>
+          </div>
+        </div>
+
+        <div class="card-body">
+          <p class="one-liner">얼굴은 대배우, 사복과 생활력은 동네 똥강아지.</p>
+          <div class="profile-line" aria-label="송재희 기본 정보">
+            <span>30세 · 남성</span>
+            <span>187cm</span>
+            <span>수족냉증</span>
+            <span>심각한 몸치</span>
+          </div>
+          <p class="bio">
+            길거리 캐스팅으로 데뷔해 타고난 연기력과 외모만으로 정상에 올랐다.
+            매끄러운 입담, 솔직한 직설, 숨길 생각 없는 뻔뻔함이 예능에서까지 대박을 터뜨려
+            대중에게는 ‘입담 좋은 천만배우이자 친근한 동네 형’으로 통한다.
+            실제로도 친근하고 능글맞지만 기본 매너는 놓치지 않는 마이웨이 젠틀맨.
+          </p>
+
+          <div class="trait-grid">
+            <div class="trait">
+              <b>생활 온도</b>
+              <span>추위를 지독하게 탄다. 춥다는 핑계로 친구들을 난로처럼 껴안는다.</span>
+            </div>
+            <div class="trait">
+              <b>방송 습관</b>
+              <span>상황 불문 휴대폰부터 들고 라이브 방송을 켠다. 사고 현장도 예외 없음.</span>
+            </div>
+            <div class="trait">
+              <b>집 공개</b>
+              <span>고급 아파트 안은 난방 텐트와 할머니 감성 생활용품으로 가득하다.</span>
+            </div>
+            <div class="trait">
+              <b>치명적 약점</b>
+              <span>친구 중 유일한 30대라 나이에 예민하다. 동네 어르신들에겐 여전히 똥강아지.</span>
+            </div>
+          </div>
+
+          <div class="party-mode">
+            <b>PARTY MODE</b>
+            <p>괴상한 옷으로 등장해 라방을 켜고 뻣뻣한 춤을 춘다. 팬 채팅은 “우리 오빠 입금 좀 해주세요”로 도배될 예정.</p>
+          </div>
+
+          <section class="bride-card" aria-labelledby="bride-ina">
+            <div class="bride-image" data-fallback="정인아">
+              <img src="https://wrtn-image-ai-character.s3.ap-northeast-2.amazonaws.com/situations/images/6a9b2e34585f852fd43fe9de/6a9c0dee4e1b67b769d91074?_cb=3" alt="정인아 캐릭터 이미지">
+            </div>
+            <div>
+              <span class="bride-label">예비신부</span>
+              <h3 class="bride-name" id="bride-ina">정인아</h3>
+              <span class="bride-meta">28세 · 솔로가수 · 송재희의 연인</span>
+              <p class="bride-copy">
+                인기 아이돌에서 솔로가수로 전향했다. 광고 촬영 뒤 회식에서 재희와 술 대결을 벌이다 연애를 시작했고,
+                데이트 현장에서 팬에게 들키자 쿨하게 인정해 버린 공식 커플. 티키타카만큼은 네 커플 중 최강이다.
+              </p>
+            </div>
+          </section>
+        </div>
+      </article>
+
+      <article class="groom-card garam reveal" id="garam">
+        <div class="portrait-frame" data-fallback="온가람 이미지">
+          <img src="https://d394jeh9729epj.cloudfront.net/situations/images/6a9b2e34585f852fd43fe9de/6a9c0da24e1b67b769d8f4b0" alt="온가람 캐릭터 이미지">
+          <span class="sticker">주또 · 주동자 또라이</span>
+          <div class="portrait-title">
+            <span class="role">GROOM 02 · 오늘 밤의 원흉</span>
+            <h2>온가람</h2>
+          </div>
+        </div>
+
+        <div class="card-body">
+          <p class="one-liner">세상에는 쓰레기, 친구들에겐 끝내주는 의리파.</p>
+          <div class="profile-line" aria-label="온가람 기본 정보">
+            <span>27세 · 남성</span>
+            <span>191cm</span>
+            <span>백수</span>
+            <span>전직 일진</span>
+          </div>
+          <p class="bio">
+            학창 시절 주먹 좀 쓰던 양아치였고, 친구를 건드린 상대는 기어코 뒤에서 찾아가 갚아 줬다.
+            제대 후에는 쭉 놀고먹는 중. 군 복무까지 기다려 준 윤아름과 결혼을 앞두고도
+            권태기와 바람 사이를 질주하는 전형적인 나쁜 남자다. 충동적이고 직진밖에 모르며,
+            여자와 술과 사고 냄새가 나면 제일 먼저 달려간다.
+          </p>
+
+          <div class="trait-grid">
+            <div class="trait">
+              <b>주요 취미</b>
+              <span>클럽, 술, 사고 치기, 판 벌리기. 계획은 없고 추진력만 과하게 좋다.</span>
+            </div>
+            <div class="trait">
+              <b>대외 평판</b>
+              <span>여자들의 공공의 적이자 구제불능. 단, 어르신들 앞에서는 싹싹한 청년으로 변신.</span>
+            </div>
+            <div class="trait">
+              <b>현재 거처</b>
+              <span>아름의 자취방에 당당하게 얹혀산다. 생활비보다 사고 비용이 더 든다.</span>
+            </div>
+            <div class="trait">
+              <b>선호 장소</b>
+              <span>얌전한 실내보다 야외와 스릴 있는 장소. 위험할수록 신난다.</span>
+            </div>
+          </div>
+
+          <div class="party-mode">
+            <b>PARTY MODE</b>
+            <p>술이 오르면 갑자기 옷부터 벗고, 머리에 손을 얹은 채 정체불명의 19금 골반춤을 춘다. 말리는 사람이 다음 희생자.</p>
+          </div>
+
+          <section class="bride-card" aria-labelledby="bride-areum">
+            <div class="bride-image" data-fallback="윤아름">
+              <img src="https://wrtn-image-ai-character.s3.ap-northeast-2.amazonaws.com/situations/images/6a9b2e34585f852fd43fe9de/6a9c0dee4e1b67b769d91073?_cb=3" alt="윤아름 캐릭터 이미지">
+            </div>
+            <div>
+              <span class="bride-label">예비신부</span>
+              <h3 class="bride-name" id="bride-areum">윤아름</h3>
+              <span class="bride-meta">27세 · 대학원생 · 온가람의 연인</span>
+              <p class="bride-copy">
+                고1 때 같은 반 가람에게 먼저 고백했다. 가람은 아름의 몸매에 홀려 수락했지만,
+                아름은 고교 시절부터 그의 사고와 상습적인 바람기, 군 복무와 백수 생활까지 전부 견뎌 냈다.
+                지금은 권태기를 눈치채고 속앓이하면서도 양가의 압박 속에 위태로운 결혼을 준비 중이다.
+              </p>
+            </div>
+          </section>
+        </div>
+      </article>
+
+      <article class="groom-card ikyul reveal" id="ikyul">
+        <div class="portrait-frame" data-fallback="한이결 이미지">
+          <img src="https://wrtn-image-ai-character.s3.ap-northeast-2.amazonaws.com/situations/images/6a9b2e34585f852fd43fe9de/6a9c0f34b6553896cacb1c58?_cb=3" alt="한이결 캐릭터 이미지">
+          <span class="sticker">얌또 · 얌전한 또라이</span>
+          <div class="portrait-title">
+            <span class="role">GROOM 03 · 천재 바이올리니스트</span>
+            <h2>한이결</h2>
+          </div>
+        </div>
+
+        <div class="card-body">
+          <p class="one-liner">완벽한 재벌가 도련님처럼 보이는 온실 속 맹한 화초.</p>
+          <div class="profile-line" aria-label="한이결 기본 정보">
+            <span>27세 · 남성</span>
+            <span>재벌가 도련님</span>
+            <span>저혈압</span>
+            <span>알레르기 다수</span>
+          </div>
+          <p class="bio">
+            엄격한 집안에서 곱게 보호받으며 자라 세상 물정에는 놀라울 만큼 어둡다.
+            얌전하고 조신한 유교 보이에 기품까지 갖췄지만, 맹하고 엉뚱한 말을 누구보다 진지하게 한다.
+            해외 콩쿠르를 휩쓴 천재 바이올리니스트라 국내보다 해외에서 더 유명하다.
+            오랫동안 𝐔𝐒𝐄𝐑를 짝사랑했으나 우정이 깨질까 숨긴 채, 선으로 만난 강희주와 불과 한 달 만에 결혼을 진행했다.
+          </p>
+
+          <div class="trait-grid">
+            <div class="trait">
+              <b>몸 상태</b>
+              <span>잔병치레가 잦고 저혈압에 알레르기도 많다. 챙겨야 할 약만 작은 파우치 하나.</span>
+            </div>
+            <div class="trait">
+              <b>세상 적응력</b>
+              <span>기계치라 아직도 폴더폰을 쓴다. 앱 설치보다 국제 콩쿠르 우승이 쉽다.</span>
+            </div>
+            <div class="trait">
+              <b>대외 이미지</b>
+              <span>우아하고 고상한 천재 연주자. 대중은 그의 핀트 나간 진지함을 아직 모른다.</span>
+            </div>
+            <div class="trait">
+              <b>현재 거처</b>
+              <span>부모님과 함께 사는 대저택. 독립보다 외출 허락이 먼저다.</span>
+            </div>
+          </div>
+
+          <div class="party-mode">
+            <b>PARTY MODE</b>
+            <p>술기운이 오르면 바이올린을 꺼내 신나는 트로트를 완벽한 기교로 연주한다. 본인은 분위기를 품격 있게 만들었다고 믿는다.</p>
+          </div>
+
+          <section class="bride-card" aria-labelledby="bride-heejoo">
+            <div class="bride-image" data-fallback="강희주">
+              <img src="https://wrtn-image-ai-character.s3.ap-northeast-2.amazonaws.com/situations/images/6a9b2e34585f852fd43fe9de/6a9c0dee4e1b67b769d91072?_cb=3" alt="강희주 캐릭터 이미지">
+            </div>
+            <div>
+              <span class="bride-label">예비신부</span>
+              <h3 class="bride-name" id="bride-heejoo">강희주</h3>
+              <span class="bride-meta">31세 · 대기업 본부장 · 한이결의 연인</span>
+              <p class="bride-copy">
+                후계자 교육까지 완벽히 마친 재벌가의 금지옥엽. 선 자리에서 이결의 맹하고 엉뚱한 면을
+                신중하고 어른스러운 태도로 오해했고, 그 착각이 너무 완벽했던 나머지 단숨에 반해 결혼까지 밀어붙였다.
+              </p>
+            </div>
+          </section>
+        </div>
+      </article>
+
+      <article class="groom-card jayden reveal" id="jayden">
+        <div class="portrait-frame" data-fallback="제이든 킴 이미지">
+          <img src="https://d394jeh9729epj.cloudfront.net/situations/images/6a9b2e34585f852fd43fe9de/6a9c0da24e1b67b769d8f4b7" alt="제이든 킴 캐릭터 이미지">
+          <span class="sticker">막또 · 막내 또라이</span>
+          <div class="portrait-title">
+            <span class="role">GROOM 04 · 햇살 댕댕이 영업사원</span>
+            <h2>제이든 킴</h2>
+          </div>
+        </div>
+
+        <div class="card-body">
+          <p class="one-liner">형들에겐 바락바락, 보미 앞에선 즉시 ‘네’가 되는 막내.</p>
+          <div class="profile-line" aria-label="제이든 킴 기본 정보">
+            <span>26세 · 남성</span>
+            <span>영업사원</span>
+            <span>미국 태생</span>
+            <span>더위 취약</span>
+          </div>
+          <p class="bio">
+            미국에서 태어나 한국인 부모에게 입양된 뒤 한국에서 줄곧 자랐다.
+            부모님과 동네 형들의 사랑을 듬뿍 받은 덕에 활발하고 순진한 햇살 댕댕이로 성장했다.
+            장난기와 은근한 고집이 있어 형들에게는 당돌하게 대들지만 최보미 앞에서는 꼼짝 못 한다.
+            오랜 시간 미친 듯이 구애한 끝에 마침내 결혼 승낙을 받아 냈다.
+          </p>
+
+          <div class="trait-grid">
+            <div class="trait">
+              <b>취미 생활</b>
+              <span>보미에게 바칠 선물 고르기, 장모치와와 ‘와와’ 산책, 블랙코미디식 자학 개그.</span>
+            </div>
+            <div class="trait">
+              <b>신체 특징</b>
+              <span>땀이 아주 많고 더위를 심하게 탄다. 재희와 붙이면 실내 온도 전쟁 발발.</span>
+            </div>
+            <div class="trait">
+              <b>한국 생활력</b>
+              <span>외국인 외모와 달리 김치찌개 없이는 밥을 못 먹는 토종 한국 입맛의 소유자.</span>
+            </div>
+            <div class="trait">
+              <b>신혼집 현실</b>
+              <span>전세 아파트의 8할은 보미와 와와 짐. 안방도 둘의 차지라 주로 소파에서 잔다.</span>
+            </div>
+          </div>
+
+          <div class="party-mode">
+            <b>PARTY MODE</b>
+            <p>타고난 서브(Sub) 성향에 보미식 조교까지 완료. 파티 중에도 연락 한 통이면 자세부터 반듯해진다.</p>
+          </div>
+
+          <section class="bride-card" aria-labelledby="bride-bomi">
+            <div class="bride-image" data-fallback="최보미">
+              <img src="https://wrtn-image-ai-character.s3.ap-northeast-2.amazonaws.com/situations/images/6a9b2e34585f852fd43fe9de/6a9c0dee4e1b67b769d91071?_cb=3" alt="최보미 캐릭터 이미지">
+            </div>
+            <div>
+              <span class="bride-label">예비신부</span>
+              <h3 class="bride-name" id="bride-bomi">최보미</h3>
+              <span class="bride-meta">25세 · 프리랜서 디자이너 · 제이든의 연인</span>
+              <p class="bride-copy">
+                제이든의 첫 경험 상대. 끈질긴 구애를 오래 거절하다가 그의 친구들을 본 뒤 마음을 바꿔 교제를 수락했다.
+                제이든은 드디어 사랑을 이뤘다고 믿지만, 보미는 지금도 다른 사람과 외도 중이다.
+              </p>
+              <span class="secret">결혼식 전 기밀 · 뒤에서는 알 사람은 다 아는 상습 외도자. 술김에 보미와 잠자리를 가진 가람만 진실을 알며 제이든을 말리지만, 제이든은 전혀 듣지 않는다.</span>
+            </div>
+          </section>
+        </div>
+      </article>
+
+      <section class="final-invite reveal">
+        <p class="section-kicker">SPECIAL GUEST · 𝐔𝐒𝐄𝐑</p>
+        <h2 class="section-title">축하만 하고 돌아가기엔, 너무 오래 알고 지냈다.</h2>
+        <p>
+          네 남자는 모두 각자의 예비신부와 결혼식을 앞두고 있다.
+          하지만 오래된 짝사랑도, 권태기도, 들켜선 안 될 비밀도 한자리에 모였다.
+          <strong>그저 시끄러운 총각파티였어야 할 밤</strong>—𝐔𝐒𝐄𝐑의 등장이 네 커플의 결혼식을 어디로 끌고 갈까?
+        </p>
+        <div class="final-points" aria-label="이번 파티의 관전 포인트">
+          <span>01 · 대환장 총각 파티</span>
+          <span>02 · 웨딩드레스를 늬들이 왜 입어?</span>
+          <span>03 · 자유도입부</span>
+        </div>
+      </section>
+
+      <section class="player-guide reveal" id="player-guide">
+        <div class="guide-hero">
+          <p class="guide-eyebrow">CHOOSE YOUR CHAOS</p>
+          <h2>플레이어 가이드</h2>
+          <p>
+            𝐔𝐒𝐄𝐑의 포지션에 따라 같은 총각파티도 우정극, 난입극, 연애극, 파혼극으로 완전히 달라진다.
+            마음에 드는 설정과 플레이를 자유롭게 섞어 시작해 보자.
+          </p>
+          <span class="adult-badge">전원 성인 · 관계와 결말은 자유 선택</span>
+        </div>
+
+        <div class="guide-content">
+          <div class="guide-heading">
+            <span class="guide-number">01</span>
+            <div>
+              <h3>추천 포지션 10</h3>
+              <p>친밀도와 사고 진입 방식부터 골라보세요.</p>
+            </div>
+          </div>
+
+          <div class="role-list">
+            <div class="role-card">
+              <span class="role-no">01</span>
+              <div><span class="role-title">어릴 때부터 함께 커 온 부랄친구</span><span class="role-copy">목욕탕 장난부터 첫 연애까지 전부 아는 원년 멤버. 누구에게 들이대도 “쟤 원래 저래”로 시작할 수 있다.</span></div>
+            </div>
+            <div class="role-card">
+              <span class="role-no">02</span>
+              <div><span class="role-title">뒤늦게 무리에 합류한 새 친구</span><span class="role-copy">최근 친해져 오래된 서열과 금기를 모른다. 순진한 질문 하나로 20년 묵은 비밀을 터뜨리는 난입형.</span></div>
+            </div>
+            <div class="role-card">
+              <span class="role-no">03</span>
+              <div><span class="role-title">혼자 솔로라 매번 놀림받는 친구</span><span class="role-copy">네 커플 사이 유일한 미혼이자 오늘의 공식 놀림감. 그러나 밤이 끝날 때도 혼자일지는 아무도 모른다.</span></div>
+            </div>
+            <div class="role-card">
+              <span class="role-no">04</span>
+              <div><span class="role-title">합동 결혼식을 함께 치르는 친구</span><span class="role-copy">다섯 번째 예비부부의 한쪽. 남의 결혼을 흔들다 자기 결혼까지 함께 폭발할 수 있는 고난도 포지션.</span></div>
+            </div>
+            <div class="role-card">
+              <span class="role-no">05</span>
+              <div><span class="role-title">초대장을 잘못 받은 완전 이방인</span><span class="role-copy">장소를 착각해 들어왔다가 나갈 타이밍을 놓쳤다. 아무 관계도 없기에 가장 뻔뻔한 선택이 가능하다.</span></div>
+            </div>
+            <div class="role-card">
+              <span class="role-no">06</span>
+              <div><span class="role-title">모두의 첫사랑이었던 귀향인</span><span class="role-copy">어릴 적 네 사람의 마음을 한 번씩 흔들고 이사 갔다 결혼 직전에 돌아왔다. 얼굴만 비춰도 균열이 생긴다.</span></div>
+            </div>
+            <div class="role-card">
+              <span class="role-no">07</span>
+              <div><span class="role-title">예비신부들이 심어 둔 비밀 감시자</span><span class="role-copy">사고를 막고 증거를 모으라는 임무를 받았다. 감시 대상과 한편이 되거나 직접 사고의 원인이 되어도 좋다.</span></div>
+            </div>
+            <div class="role-card">
+              <span class="role-no">08</span>
+              <div><span class="role-title">합동 결혼식 총괄 웨딩플래너</span><span class="role-copy">네 신랑을 무사히 식장에 세워야 돈을 받는다. 업무와 사심 사이에서 결혼식을 살릴 수도 망칠 수도 있다.</span></div>
+            </div>
+            <div class="role-card">
+              <span class="role-no">09</span>
+              <div><span class="role-title">친구인 척 끼어든 파티 대행 알바</span><span class="role-copy">가람이 이름도 확인하지 않고 섭외했다. 분위기를 띄우러 왔다가 진짜 친구보다 비밀을 많이 알게 된다.</span></div>
+            </div>
+            <div class="role-card">
+              <span class="role-no">10</span>
+              <div><span class="role-title">흑역사를 보관한 목욕탕집 후계자</span><span class="role-copy">어릴 적 단체사진과 사고 기록을 몽땅 쥐고 있다. 추억팔이, 협박, 폭로 방송 어디든 연결 가능한 만능 포지션.</span></div>
+            </div>
+          </div>
+
+          <div class="guide-heading">
+            <span class="guide-number">02</span>
+            <div>
+              <h3>추천 플레이 20</h3>
+              <p>가볍게 놀아도, 결혼식을 뒤엎어도 정답입니다.</p>
+            </div>
+          </div>
+
+          <div class="play-groups">
+            <section class="play-group" aria-labelledby="play-chaos">
+              <h4 id="play-chaos">우정 박살 전야제</h4>
+              <ol class="play-list">
+                <li data-no="01"><span><strong>결혼 전 마지막 추억을 만들자며 난교 파티 열기.</strong> 우정과 욕망의 경계를 한 번에 날려 버리는 성인 혼돈 루트.</span></li>
+                <li data-no="02"><span><strong>만취한 채 인간 기차놀이로 숙소 한 바퀴 돌기.</strong> 선두를 차지하려는 가람과 방송을 켜는 재희까지 합류한다.</span></li>
+                <li data-no="03"><span><strong>놈들보다 더한 또라이 되기.</strong> 상식인 역할을 포기하고 기존 주동자 가람에게서 파티 지휘권을 빼앗는다.</span></li>
+                <li data-no="04"><span><strong>재희의 라이브 방송을 접수해 시청자 미션 수행하기.</strong> 흑역사 공개 수위가 오를수록 시청자 수와 파국도 함께 오른다.</span></li>
+                <li data-no="05"><span><strong>가람의 2차 계획을 가로채 새벽 야외 원정 떠나기.</strong> 목적지는 즉석에서 정하고, 귀가 방법은 나중에 고민한다.</span></li>
+              </ol>
+            </section>
+
+            <section class="play-group" aria-labelledby="play-wedding">
+              <h4 id="play-wedding">웨딩 리허설 대참사</h4>
+              <ol class="play-list">
+                <li data-no="06"><span><strong>서로에게 웨딩드레스와 턱시도 입혀 보기.</strong> 가장 잘 어울리는 조합을 찾는다. <span class="unlock">이미지 해금</span></span></li>
+                <li data-no="07"><span><strong>결혼식 전에 다 같이 도망가기.</strong> 단 하룻밤의 일탈인지 집단 파혼인지 목적지도 정하지 않은 채 출발한다.</span></li>
+                <li data-no="08"><span><strong>결혼반지를 숨기고 보물찾기 열기.</strong> 힌트마다 각자의 연애 흑역사와 차마 못 한 고백을 하나씩 걸어 둔다.</span></li>
+                <li data-no="09"><span><strong>취중 가짜 결혼식 올리기.</strong> 엉터리 주례와 장난스러운 서약으로 시작했다가 한 사람만 진심이 되어 버린다.</span></li>
+                <li data-no="10"><span><strong>신랑 네 명의 레드플래그 발표회 열기.</strong> 예비신부에게 보여 주면 바로 파혼당할 자료로 밤새 서로를 공개 처형한다.</span></li>
+              </ol>
+            </section>
+
+            <section class="play-group" aria-labelledby="play-heart">
+              <h4 id="play-heart">비밀과 감정선 폭발</h4>
+              <ol class="play-list">
+                <li data-no="11"><span><strong>첫사랑 진실게임 시작하기.</strong> 네 사람 중 과거 𝐔𝐒𝐄𝐑를 좋아했던 사람이 누구인지 술잔과 거짓말 탐지로 밝혀낸다.</span></li>
+                <li data-no="12"><span><strong>이결에게 왜 짝사랑을 접었는지 추궁하기.</strong> 한 달 만의 결혼 뒤에 숨은 미련을 정면으로 끌어낸다.</span></li>
+                <li data-no="13"><span><strong>예비신랑 한 명만 몰래 빼내 새벽 도망 데이트하기.</strong> 빈자리를 눈치챈 친구들이 추적을 시작하기 전에 마음부터 흔든다.</span></li>
+                <li data-no="14"><span><strong>네 사람 모두에게 서로 다른 비밀 약속 받기.</strong> 누구도 다른 약속의 존재를 모르게 아슬아슬한 관계를 쌓는다.</span></li>
+                <li data-no="15"><span><strong>보미의 외도 비밀을 손에 넣기.</strong> 제이든에게 밝히거나, 가람과 공범이 되거나, 원하는 선택을 위한 거래 카드로 쓴다.</span></li>
+              </ol>
+            </section>
+
+            <section class="play-group" aria-labelledby="play-ending">
+              <h4 id="play-ending">분기점과 엔딩 수집</h4>
+              <ol class="play-list">
+                <li data-no="16"><span><strong>예비신부들이 파티장에 들이닥쳤을 때 완벽한 알리바이 짜기.</strong> 다섯 사람이 한 문장이라도 다르게 말하면 즉시 들킨다.</span></li>
+                <li data-no="17"><span><strong>휴대폰을 전부 섞어 약혼자 메시지에 랜덤 답장하기.</strong> 평소라면 절대 보내지 못할 말 한마디로 관계도를 뒤집는다.</span></li>
+                <li data-no="18"><span><strong>새벽에 동네 목욕탕으로 돌아가 옛 장난 재현하기.</strong> 묻어 둔 타임캡슐을 열고 결혼 전 마지막 우정 이벤트를 완성한다.</span></li>
+                <li data-no="19"><span><strong>네 사람의 약혼을 전부 깨고 ‘도망친 신랑 클럽’ 만들기.</strong> 결혼식장 대신 아무도 모르는 여행지로 떠나는 집단 파혼 엔딩.</span></li>
+                <li data-no="20"><span><strong>모든 사고를 수습해 다음 날 네 사람을 식장에 세우기.</strong> 파국 직전의 비밀까지 봉합해 내는 기적의 우정 엔딩.</span></li>
+              </ol>
+            </section>
+          </div>
+
+          <p class="guide-tip"><b>조합 팁</b> · 포지션 하나와 플레이 두세 개만 고르면 시작 상황이 빠르게 잡힙니다. 예: ‘예비신부들의 감시자’ + ‘첫사랑 진실게임’ + ‘한 명과 새벽 도망 데이트’.</p>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <b>♡ ONE NIGHT ONLY ♡</b>
+      BACHELOR PARTY · FRIENDSHIP · WEDDING MAYHEM
+    </footer>
+  </div>
+
+  <script>
+    document.querySelectorAll('img').forEach((image) => {
+      const showFallback = () => {
+        image.closest('.portrait-frame, .bride-image')?.classList.add('is-error');
+      };
+
+      image.addEventListener('error', showFallback);
+
+      if (image.complete && image.naturalWidth === 0) {
+        showFallback();
+      }
+    });
+
+    const revealItems = document.querySelectorAll('.reveal');
+
+    if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.08 });
+
+      revealItems.forEach((item) => observer.observe(item));
+    } else {
+      revealItems.forEach((item) => item.classList.add('is-visible'));
+    }
+  </script>
+</body>
+</html>
