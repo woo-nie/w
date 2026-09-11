@@ -470,7 +470,7 @@
             </div>
           </div>
         </div>
-      </div>
+        </div>
     </section>
 
     <div class="shell">
@@ -1089,7 +1089,7 @@
           var image = p.image ? "<img src='"+esc(p.image)+"' alt='"+esc(p.name)+" 세로형 프로필 이미지' loading='lazy' referrerpolicy='no-referrer' onerror=\"this.style.display='none';this.parentNode.style.background='linear-gradient(145deg,#15232a,#07090c)'\">" : "<div style='position:absolute;inset:0;display:grid;place-items:center;color:rgba(106,247,217,.3);font:900 4rem var(--mono)'>?</div>";
           var tags = p.personality.slice(0,5).map(function(tag){return "<span class='tag'>"+esc(tag)+"</span>";}).join("");
           return "<article class='character-card' data-type='"+esc(p.type)+"'>"+
-            "<div class='portrait'>"+image+"<span class='portrait-code'>P-"+String(index+1).padStart(2,"0")+"</span><span class='trait-badge'>"+esc(p.typeLabel)+"</span></div>"+
+            "<div class='portrait'>"+image+"<span class='portrait-code'>P-"+String(index+1).padStart(2,"0")+"</span></div>"+
             "<div class='card-body'><div class='name-row'><h3>"+esc(p.name)+"<small>"+esc(p.real)+"</small></h3><span class='alignment'>"+esc(p.alignment)+"</span></div>"+
             "<p class='basic-line'>"+esc([p.age,p.gender,p.nation,p.job,p.height].join(" · "))+"</p>"+
             "<p class='public-image'>"+esc(p.public)+"</p><div class='tags'>"+tags+"</div><p class='card-note'>"+esc(p.note)+"</p>"+
