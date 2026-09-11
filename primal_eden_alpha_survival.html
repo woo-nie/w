@@ -1,0 +1,1232 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#05070a">
+  <meta name="description" content="프라이멀 에덴 배틀 알파 서바이벌의 세계관, 규칙, 섬 지도, 참가자 기록과 플레이 가이드">
+  <title>PRIMAL EDEN : 알파 결정전</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2305070a'/%3E%3Cpath d='M32 8 54 50H10Z' fill='none' stroke='%236af7d9' stroke-width='4'/%3E%3Ccircle cx='32' cy='38' r='8' fill='%23ff4f92'/%3E%3C/svg%3E">
+  <style>
+    :root{
+      --bg:#05070a;
+      --bg-soft:#090d12;
+      --panel:rgba(11,17,23,.84);
+      --panel-strong:#0d131b;
+      --line:rgba(138,164,177,.18);
+      --line-hot:rgba(106,247,217,.45);
+      --text:#edf7f5;
+      --muted:#91a2a8;
+      --cyan:#6af7d9;
+      --cyan-2:#1fc8b3;
+      --pink:#ff4f92;
+      --amber:#ffca64;
+      --red:#ff5b5b;
+      --shadow:0 24px 70px rgba(0,0,0,.42);
+      --radius:22px;
+      --mono:"Cascadia Code","SFMono-Regular",Consolas,monospace;
+      --sans:Pretendard,SUIT,"Noto Sans KR","Apple SD Gothic Neo",system-ui,sans-serif;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth;background:var(--bg)}
+    body{margin:0;background:
+      radial-gradient(circle at 15% 8%,rgba(106,247,217,.09),transparent 30rem),
+      radial-gradient(circle at 92% 38%,rgba(255,79,146,.07),transparent 28rem),
+      linear-gradient(180deg,#05070a 0%,#070a0e 48%,#030507 100%);
+      color:var(--text);font-family:var(--sans);font-size:16px;line-height:1.72;overflow-x:hidden}
+    body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:20;opacity:.14;background:repeating-linear-gradient(180deg,transparent 0 3px,rgba(255,255,255,.03) 4px)}
+    body.modal-open{overflow:hidden}
+    button,a{font:inherit}
+    button{color:inherit}
+    a{color:inherit;text-decoration:none}
+    ::selection{background:rgba(106,247,217,.28);color:#fff}
+    :focus-visible{outline:2px solid var(--cyan);outline-offset:3px}
+    .skip{position:fixed;left:1rem;top:-5rem;z-index:999;background:var(--cyan);color:#03100d;padding:.7rem 1rem;border-radius:10px;font-weight:900}
+    .skip:focus{top:1rem}
+
+    .entry-gate{position:fixed;inset:0;z-index:1000;display:grid;place-items:center;padding:1.2rem;background:
+      radial-gradient(circle at 50% 25%,rgba(106,247,217,.16),transparent 35rem),
+      radial-gradient(circle at 20% 90%,rgba(255,79,146,.12),transparent 28rem),#020406;transition:opacity .65s ease,visibility .65s ease}
+    .entry-gate::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(106,247,217,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(106,247,217,.035) 1px,transparent 1px);background-size:44px 44px;mask-image:linear-gradient(to bottom,#000,transparent 85%);animation:gridMove 14s linear infinite}
+    .entry-gate.is-gone{opacity:0;visibility:hidden}
+    .entry-particles{position:absolute;inset:0;overflow:hidden;pointer-events:none}
+    .entry-particles i{position:absolute;width:3px;height:3px;border-radius:50%;background:var(--cyan);box-shadow:0 0 12px var(--cyan);animation:drift 8s linear infinite;opacity:.75}
+    .entry-particles i:nth-child(2n){background:var(--pink);box-shadow:0 0 12px var(--pink);animation-duration:11s}
+    .entry-particles i:nth-child(3n){width:1px;height:18px;border-radius:1px}
+    .entry-panel{position:relative;width:min(760px,100%);border:1px solid rgba(106,247,217,.46);border-radius:26px;padding:clamp(1.35rem,5vw,3.25rem);background:linear-gradient(145deg,rgba(10,18,23,.95),rgba(4,7,11,.94));box-shadow:0 0 0 1px rgba(255,255,255,.03) inset,0 0 65px rgba(106,247,217,.15),0 30px 100px rgba(0,0,0,.75);overflow:hidden}
+    .entry-panel::before{content:"";position:absolute;inset:-150% -50%;background:linear-gradient(100deg,transparent 46%,rgba(106,247,217,.11) 50%,transparent 54%);animation:shimmer 5.5s linear infinite}
+    .entry-panel::after{content:"";position:absolute;inset:10px;border:1px solid rgba(255,255,255,.055);border-radius:18px;pointer-events:none}
+    .entry-panel>*{position:relative;z-index:1}
+    .boot-label{display:flex;align-items:center;gap:.55rem;color:var(--cyan);font:700 .78rem/1 var(--mono);letter-spacing:.16em;text-transform:uppercase}
+    .boot-dot{width:8px;height:8px;border-radius:50%;background:var(--cyan);box-shadow:0 0 14px var(--cyan);animation:pulse 1.4s ease-in-out infinite}
+    .entry-kicker{margin:2.4rem 0 .5rem;color:var(--muted);font:700 .8rem/1.4 var(--mono);letter-spacing:.18em}
+    .entry-title{margin:0;max-width:9ch;font-family:Impact,"Arial Black",var(--sans);font-size:clamp(3.5rem,13vw,8rem);font-weight:900;line-height:.8;letter-spacing:-.045em;text-transform:uppercase;text-shadow:4px 0 0 rgba(255,79,146,.5),-4px 0 0 rgba(106,247,217,.45);animation:titleFlicker 6s infinite}
+    .entry-sub{margin:.85rem 0 2rem;font-weight:800;font-size:clamp(1.15rem,3vw,1.65rem);letter-spacing:.12em}
+    .boot-log{min-height:3.4rem;margin:1.5rem 0;padding:1rem 1.1rem;border-left:2px solid var(--cyan);background:rgba(106,247,217,.045);color:#b9cbc9;font-family:var(--mono);font-size:.86rem;line-height:1.65}
+    .age-note{display:flex;align-items:flex-start;gap:.65rem;margin:0 0 1.1rem;color:#bac6c8;font-size:.88rem}
+    .age-note strong{color:var(--pink)}
+    .entry-actions{display:flex;gap:.75rem;flex-wrap:wrap}
+    .btn{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:.55rem;min-height:46px;padding:.75rem 1.05rem;border:1px solid var(--line);border-radius:13px;background:#0c1218;color:var(--text);font-weight:850;cursor:pointer;transition:transform .2s ease,border-color .2s ease,background .2s ease,box-shadow .2s ease}
+    .btn:hover{transform:translateY(-2px);border-color:rgba(106,247,217,.6);background:#111b22}
+    .btn-primary{background:var(--cyan);border-color:var(--cyan);color:#04100e;box-shadow:0 0 25px rgba(106,247,217,.2)}
+    .btn-primary:hover{background:#91ffe8;color:#04100e;box-shadow:0 0 35px rgba(106,247,217,.34)}
+    .btn-danger{border-color:rgba(255,79,146,.4);color:#ff9ebd;background:rgba(255,79,146,.07)}
+    .btn-ghost{background:transparent}
+    .btn-sm{min-height:38px;padding:.55rem .78rem;border-radius:10px;font-size:.82rem}
+
+    .top-hud{position:sticky;top:0;z-index:100;border-bottom:1px solid var(--line);background:rgba(5,7,10,.82);backdrop-filter:blur(18px) saturate(130%)}
+    .hud-inner{width:min(1180px,calc(100% - 2rem));min-height:64px;margin:auto;display:flex;align-items:center;gap:1rem}
+    .brand{display:flex;align-items:center;gap:.8rem;min-width:max-content}
+    .brand-mark{width:32px;height:32px;display:grid;place-items:center;border:1px solid var(--line-hot);border-radius:9px;color:var(--cyan);font:900 .78rem var(--mono);transform:rotate(45deg)}
+    .brand-mark span{transform:rotate(-45deg)}
+    .brand-copy strong{display:block;font:900 .86rem/1 var(--mono);letter-spacing:.08em}
+    .brand-copy small{display:block;margin-top:.28rem;color:var(--muted);font:600 .65rem/1 var(--mono);letter-spacing:.12em}
+    .hud-ticker{flex:1;min-width:0;overflow:hidden;border-left:1px solid var(--line);border-right:1px solid var(--line);padding:0 1rem;white-space:nowrap}
+    .hud-ticker span{display:inline-block;color:#b5c4c5;font:650 .78rem/1.4 var(--mono);animation:ticker 18s linear infinite}
+    .hud-actions{display:flex;align-items:center;gap:.6rem}
+    .points{font:850 .82rem var(--mono);white-space:nowrap;color:var(--amber)}
+    .nav-wrap{border-top:1px solid rgba(255,255,255,.03)}
+    .nav-scroller{width:min(1180px,calc(100% - 2rem));margin:auto;display:flex;gap:.25rem;overflow-x:auto;scrollbar-width:none;padding:.5rem 0}
+    .nav-scroller::-webkit-scrollbar{display:none}
+    .nav-link{white-space:nowrap;padding:.5rem .75rem;border-radius:9px;color:var(--muted);font-size:.78rem;font-weight:800;letter-spacing:.02em}
+    .nav-link:hover,.nav-link.is-active{color:#07100f;background:var(--cyan)}
+
+    main{position:relative;z-index:2}
+    .shell{width:min(1180px,calc(100% - 2rem));margin:0 auto}
+    .section{padding:clamp(4.5rem,9vw,7.5rem) 0;border-bottom:1px solid rgba(255,255,255,.055)}
+    .section-head{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:1rem;align-items:end;margin-bottom:2rem}
+    .eyebrow{display:flex;align-items:center;gap:.7rem;margin:0 0 .75rem;color:var(--cyan);font:800 .76rem/1.4 var(--mono);letter-spacing:.15em;text-transform:uppercase}
+    .eyebrow::before{content:"";width:28px;height:1px;background:currentColor}
+    h1,h2,h3,p{word-break:keep-all}
+    h2{margin:0;font-size:clamp(2rem,6vw,4.6rem);line-height:.96;letter-spacing:-.055em}
+    .section-lede{max-width:760px;margin:.9rem 0 0;color:#a9b7ba;font-size:1rem}
+    .section-index{font:900 clamp(3rem,8vw,6rem)/.8 var(--mono);color:transparent;-webkit-text-stroke:1px rgba(106,247,217,.18)}
+
+    .hero{min-height:calc(100svh - 110px);display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(1.5rem,5vw,4rem);align-items:center;padding:5.5rem 0}
+    .hero-copy{position:relative}
+    .live-pill{display:inline-flex;align-items:center;gap:.55rem;margin-bottom:1.4rem;padding:.5rem .75rem;border:1px solid rgba(255,91,91,.25);border-radius:999px;background:rgba(255,91,91,.065);color:#ffadad;font:800 .72rem var(--mono);letter-spacing:.08em}
+    .live-pill i{width:7px;height:7px;border-radius:50%;background:var(--red);box-shadow:0 0 12px var(--red);animation:pulse 1s infinite}
+    .hero-title{margin:0;font-family:Impact,"Arial Black",var(--sans);font-size:clamp(4.2rem,11vw,9rem);font-weight:900;line-height:.76;letter-spacing:-.055em;text-transform:uppercase}
+    .hero-title span{display:block;color:transparent;-webkit-text-stroke:1px rgba(237,247,245,.62)}
+    .hero-title em{display:block;margin-top:.18em;color:var(--cyan);font-style:normal}
+    .hero-desc{max-width:620px;margin:1.6rem 0 0;color:#afbec0;font-size:clamp(1rem,1.8vw,1.16rem)}
+    .hero-meta{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:1.7rem}
+    .meta-chip{padding:.55rem .75rem;border:1px solid var(--line);border-radius:999px;background:rgba(255,255,255,.025);color:#c8d2d2;font:750 .74rem var(--mono)}
+    .hero-console{position:relative;min-height:500px;display:flex;align-items:center;justify-content:center}
+    .orbit{position:absolute;width:min(480px,90vw);aspect-ratio:1;border:1px solid rgba(106,247,217,.18);border-radius:50%;animation:spin 30s linear infinite}
+    .orbit::before,.orbit::after{content:"";position:absolute;inset:10%;border:1px dashed rgba(255,79,146,.17);border-radius:50%}
+    .orbit::after{inset:27%;border-style:solid;border-color:rgba(106,247,217,.12)}
+    .radar-card{position:relative;width:min(390px,86vw);aspect-ratio:.78;border:1px solid var(--line-hot);border-radius:32px;background:linear-gradient(165deg,rgba(17,30,35,.86),rgba(6,10,14,.93));box-shadow:var(--shadow),0 0 45px rgba(106,247,217,.09);overflow:hidden;transform:rotate(2deg)}
+    .radar-card::before{content:"";position:absolute;inset:-20%;background:conic-gradient(from 90deg,transparent 0 75%,rgba(106,247,217,.16) 88%,transparent 100%);animation:spin 5s linear infinite}
+    .radar-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(106,247,217,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(106,247,217,.055) 1px,transparent 1px);background-size:38px 38px}
+    .radar-content{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:space-between;padding:1.4rem}
+    .radar-top{display:flex;justify-content:space-between;color:#b7c8c7;font:800 .72rem var(--mono);letter-spacing:.08em}
+    .island-mini{align-self:center;width:67%;filter:drop-shadow(0 0 15px rgba(106,247,217,.34));animation:float 5s ease-in-out infinite}
+    .island-mini path{fill:rgba(106,247,217,.13);stroke:var(--cyan);stroke-width:2}
+    .radar-readout{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem}
+    .radar-readout div{padding:.7rem;border:1px solid var(--line);border-radius:12px;background:rgba(0,0,0,.28)}
+    .radar-readout small{display:block;color:var(--muted);font:.62rem var(--mono)}
+    .radar-readout strong{display:block;margin-top:.2rem;color:var(--cyan);font:.8rem var(--mono)}
+
+    .warning{display:grid;grid-template-columns:auto 1fr auto;gap:1rem;align-items:center;margin-top:-1.5rem;padding:1.1rem 1.2rem;border:1px solid rgba(255,91,91,.26);border-radius:16px;background:linear-gradient(90deg,rgba(255,91,91,.09),rgba(255,79,146,.035));box-shadow:0 20px 50px rgba(0,0,0,.2)}
+    .warning-icon{width:42px;height:42px;display:grid;place-items:center;border-radius:12px;background:rgba(255,91,91,.12);color:#ff8c8c;font-weight:950}
+    .warning strong{display:block;color:#ffd1d1}
+    .warning p{margin:.15rem 0 0;color:#b7a8aa;font-size:.88rem}
+    .warning-badge{padding:.45rem .7rem;border:1px solid rgba(255,91,91,.3);border-radius:999px;color:#ff9f9f;font:900 .72rem var(--mono)}
+
+    .prologue-grid{display:grid;grid-template-columns:.72fr 1.28fr;gap:1.4rem;align-items:start}
+    .flight-status{position:sticky;top:122px;padding:1.3rem;border:1px solid var(--line);border-radius:var(--radius);background:var(--panel);box-shadow:var(--shadow)}
+    .flight-status h3{margin:0 0 1rem;font:850 .84rem var(--mono);letter-spacing:.12em}
+    .flight-row{display:flex;justify-content:space-between;gap:1rem;padding:.8rem 0;border-top:1px solid var(--line);font-size:.85rem}
+    .flight-row span{color:var(--muted)}
+    .flight-row strong{text-align:right}
+    .danger-meter{height:8px;margin-top:1rem;border:1px solid rgba(255,91,91,.3);border-radius:99px;overflow:hidden;background:#07090b}
+    .danger-meter i{display:block;width:96%;height:100%;background:linear-gradient(90deg,var(--amber),var(--red));animation:meterPulse 1.8s ease-in-out infinite}
+    .story{display:grid;gap:1.1rem}
+    .story p{margin:0;color:#c2ccce;font-size:1.02rem;line-height:1.9}
+    .system-msg{position:relative;padding:1.3rem 1.35rem 1.3rem 1.65rem;border:1px solid rgba(106,247,217,.25);border-left:3px solid var(--cyan);border-radius:0 17px 17px 0;background:linear-gradient(100deg,rgba(106,247,217,.085),rgba(6,11,15,.75));box-shadow:0 12px 40px rgba(0,0,0,.18)}
+    .system-msg::before{content:"SYSTEM // BROADCAST";display:block;margin-bottom:.6rem;color:var(--cyan);font:900 .7rem var(--mono);letter-spacing:.13em}
+    .system-msg.pink{border-color:rgba(255,79,146,.25);border-left-color:var(--pink);background:linear-gradient(100deg,rgba(255,79,146,.08),rgba(6,11,15,.75))}
+    .system-msg.pink::before{color:var(--pink)}
+    .final-line{padding:1.5rem 0 .2rem;font-weight:950;font-size:clamp(1.35rem,3vw,2.1rem);line-height:1.35;color:#fff}
+    .final-line span{color:var(--pink)}
+
+    .overview-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:1.3rem}
+    .id-card{position:relative;padding:1.4rem;border:1px solid var(--line);border-radius:var(--radius);background:linear-gradient(145deg,rgba(14,22,29,.95),rgba(7,10,14,.88));overflow:hidden}
+    .id-card::after{content:"PRIMAL EDEN";position:absolute;right:-1rem;bottom:-1.4rem;color:rgba(255,255,255,.025);font:900 4rem Impact;transform:rotate(-6deg)}
+    .id-top{display:flex;justify-content:space-between;align-items:center;gap:1rem;padding-bottom:1rem;border-bottom:1px dashed rgba(255,255,255,.14)}
+    .id-top small{color:var(--muted);font:700 .72rem var(--mono)}
+    .id-top strong{color:var(--cyan);font:900 .78rem var(--mono)}
+    .id-main{padding:1.35rem 0}
+    .id-main h3{margin:0;font-size:clamp(1.8rem,4vw,3.2rem);line-height:1;letter-spacing:-.04em}
+    .id-main p{margin:.65rem 0 0;color:var(--muted)}
+    .currency-panel{display:grid;grid-template-columns:auto 1fr;gap:1rem;align-items:center;padding:1rem;border:1px solid rgba(255,202,100,.18);border-radius:15px;background:rgba(255,202,100,.045)}
+    .currency-symbol{width:60px;height:60px;display:grid;place-items:center;border-radius:16px;background:var(--amber);color:#161004;font:950 1.5rem var(--mono);box-shadow:0 0 25px rgba(255,202,100,.17)}
+    .currency-panel strong{display:block}
+    .currency-panel p{margin:.15rem 0 0;color:#b3ada0;font-size:.84rem}
+    .quick-actions{display:grid;grid-template-columns:repeat(2,1fr);gap:.8rem}
+    .action-card{min-height:136px;padding:1.1rem;border:1px solid var(--line);border-radius:18px;background:var(--panel);text-align:left;cursor:pointer;transition:.25s ease}
+    .action-card:hover{transform:translateY(-3px);border-color:var(--line-hot);background:#0f171d}
+    .action-card .icon{display:block;margin-bottom:1.25rem;color:var(--cyan);font-size:1.35rem}
+    .action-card strong{display:block}
+    .action-card small{display:block;margin-top:.25rem;color:var(--muted)}
+    .event-output{grid-column:1/-1;min-height:92px;padding:1rem 1.1rem;border:1px dashed var(--line-hot);border-radius:18px;background:rgba(106,247,217,.035)}
+    .event-output small{display:block;color:var(--cyan);font:800 .68rem var(--mono);letter-spacing:.1em}
+    .event-output p{margin:.38rem 0 0;color:#ccd7d7}
+
+    .rule-layout{display:grid;grid-template-columns:repeat(12,1fr);gap:1rem}
+    .rule-card{grid-column:span 4;padding:1.2rem;border:1px solid var(--line);border-radius:18px;background:linear-gradient(145deg,rgba(14,21,27,.9),rgba(7,10,14,.84));box-shadow:0 16px 42px rgba(0,0,0,.14)}
+    .rule-card.wide{grid-column:span 8}
+    .rule-card.full{grid-column:1/-1}
+    .rule-number{display:inline-flex;width:34px;height:34px;align-items:center;justify-content:center;border:1px solid var(--line-hot);border-radius:10px;color:var(--cyan);font:900 .72rem var(--mono)}
+    .rule-card h3{margin:1rem 0 .6rem;font-size:1.15rem}
+    .rule-card p{margin:.35rem 0;color:#abb9bc;font-size:.9rem}
+    .rule-card ul{margin:.7rem 0 0;padding-left:1.15rem;color:#b9c5c7;font-size:.89rem}
+    .rule-card li+li{margin-top:.42rem}
+    .rule-card strong{color:#e7f6f3}
+    .rule-alert{border-color:rgba(255,79,146,.24);background:linear-gradient(145deg,rgba(255,79,146,.07),rgba(7,10,14,.88))}
+    .rule-alert .rule-number{border-color:rgba(255,79,146,.42);color:var(--pink)}
+    .spoiler-row{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;margin-top:1rem}
+    .spoiler-button{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:1.2rem 1.25rem;border:1px solid rgba(255,79,146,.26);border-radius:18px;background:rgba(255,79,146,.045);text-align:left;cursor:pointer;transition:.25s ease}
+    .spoiler-button:hover{transform:translateY(-3px);border-color:var(--pink);box-shadow:0 18px 50px rgba(0,0,0,.22)}
+    .spoiler-button strong{display:block}
+    .spoiler-button small{display:block;margin-top:.22rem;color:#a7969e}
+    .spoiler-button .lock{font-size:1.3rem;color:var(--pink)}
+
+    .broadcast{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+    .broadcast-screen{position:relative;min-height:330px;border:1px solid var(--line);border-radius:22px;background:
+      linear-gradient(rgba(106,247,217,.04) 1px,transparent 1px),
+      linear-gradient(90deg,rgba(106,247,217,.04) 1px,transparent 1px),#071016;background-size:34px 34px;overflow:hidden}
+    .broadcast-screen::before{content:"";position:absolute;inset:0;background:linear-gradient(120deg,transparent 35%,rgba(106,247,217,.08),transparent 65%);animation:screenSweep 5s ease-in-out infinite}
+    .cam-frame{position:absolute;inset:1.3rem;border:1px solid rgba(106,247,217,.25);border-radius:15px}
+    .cam-frame::before,.cam-frame::after{content:"";position:absolute;width:28px;height:28px;border-color:var(--cyan)}
+    .cam-frame::before{left:-1px;top:-1px;border-left:3px solid;border-top:3px solid}
+    .cam-frame::after{right:-1px;bottom:-1px;border-right:3px solid;border-bottom:3px solid}
+    .cam-status{position:absolute;top:1.8rem;left:1.8rem;display:flex;align-items:center;gap:.45rem;color:#ff9c9c;font:800 .7rem var(--mono)}
+    .cam-status i{width:7px;height:7px;border-radius:50%;background:var(--red);animation:pulse 1s infinite}
+    .cam-center{position:absolute;inset:0;display:grid;place-items:center;text-align:center}
+    .cam-center strong{display:block;font:900 clamp(2rem,5vw,4rem)/1 Impact;letter-spacing:.04em;color:rgba(237,247,245,.88)}
+    .cam-center small{color:var(--cyan);font:700 .72rem var(--mono);letter-spacing:.16em}
+    .comment-feed{padding:1.2rem;border:1px solid var(--line);border-radius:22px;background:var(--panel)}
+    .comment-head{display:flex;align-items:center;justify-content:space-between;padding-bottom:.9rem;border-bottom:1px solid var(--line)}
+    .comment-head strong{font:850 .83rem var(--mono)}
+    .viewer-count{color:var(--pink);font:800 .74rem var(--mono)}
+    .comments{height:240px;overflow:hidden;mask-image:linear-gradient(to bottom,transparent,#000 12%,#000 88%,transparent)}
+    .comment-track{animation:commentsUp 18s linear infinite}
+    .comment{display:flex;gap:.75rem;padding:.75rem 0;border-bottom:1px solid rgba(255,255,255,.045);font-size:.84rem}
+    .comment b{flex:0 0 auto;color:var(--cyan);font:800 .72rem var(--mono)}
+    .comment span{color:#b8c4c6}
+    .sponsor-rule{grid-column:1/-1;display:grid;grid-template-columns:auto 1fr auto;gap:1rem;align-items:center;padding:1rem 1.1rem;border:1px solid rgba(255,202,100,.18);border-radius:16px;background:rgba(255,202,100,.04)}
+    .sponsor-rule .big{color:var(--amber);font:900 1.35rem var(--mono)}
+    .sponsor-rule p{margin:0;color:#bcb8ad;font-size:.88rem}
+    .sponsor-rule button{margin:0}
+
+    .environment-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem}
+    .env-card{position:relative;min-height:240px;padding:1.25rem;border:1px solid var(--line);border-radius:20px;background:var(--panel);overflow:hidden}
+    .env-card::after{content:attr(data-code);position:absolute;right:.8rem;top:.4rem;color:rgba(255,255,255,.035);font:900 4.5rem Impact}
+    .env-icon{position:relative;z-index:1;width:44px;height:44px;display:grid;place-items:center;border:1px solid var(--line-hot);border-radius:13px;color:var(--cyan);background:rgba(106,247,217,.05)}
+    .env-card h3{position:relative;z-index:1;margin:1.2rem 0 .55rem}
+    .env-card p,.env-card li{position:relative;z-index:1;color:#aebcbe;font-size:.88rem}
+    .env-card ul{margin:.6rem 0 0;padding-left:1.15rem}
+    .magnetic{border-color:rgba(255,79,146,.26)}
+    .magnetic .env-icon{border-color:rgba(255,79,146,.42);color:var(--pink);background:rgba(255,79,146,.055)}
+    .environment-console{grid-column:1/-1;display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:1.1rem 1.2rem;border:1px dashed var(--line-hot);border-radius:18px;background:rgba(106,247,217,.03)}
+    .environment-console p{margin:0;color:#b6c3c4}
+
+    .classified-banner{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:1.2rem;padding:1rem 1.1rem;border:1px solid rgba(255,202,100,.24);border-radius:16px;background:rgba(255,202,100,.045)}
+    .classified-banner strong{color:#ffda8f}
+    .classified-banner small{display:block;margin-top:.2rem;color:#a99f8a}
+    .filter-bar{display:flex;align-items:center;gap:.5rem;overflow-x:auto;padding-bottom:.7rem;margin-bottom:1rem;scrollbar-width:none}
+    .filter-bar::-webkit-scrollbar{display:none}
+    .filter-btn{white-space:nowrap;padding:.55rem .78rem;border:1px solid var(--line);border-radius:999px;background:#0a0f14;color:var(--muted);font-size:.78rem;font-weight:800;cursor:pointer}
+    .filter-btn.is-active{background:var(--cyan);border-color:var(--cyan);color:#04110e}
+    .character-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem}
+    .character-card{position:relative;border:1px solid var(--line);border-radius:22px;background:linear-gradient(160deg,rgba(15,22,29,.96),rgba(7,10,14,.93));overflow:hidden;box-shadow:0 15px 45px rgba(0,0,0,.18);transition:transform .28s ease,border-color .28s ease,box-shadow .28s ease}
+    .character-card:hover{transform:translateY(-6px);border-color:rgba(106,247,217,.38);box-shadow:0 26px 70px rgba(0,0,0,.35)}
+    .character-card.is-hidden{display:none}
+    .portrait{position:relative;aspect-ratio:4/5.4;background:linear-gradient(140deg,#121923,#050709);overflow:hidden}
+    .portrait::after{content:"";position:absolute;inset:0;background:linear-gradient(to bottom,transparent 55%,rgba(7,10,14,.94));pointer-events:none}
+    .portrait img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block;filter:saturate(.87) contrast(1.03);transition:transform .5s ease,filter .5s ease}
+    .character-card:hover .portrait img{transform:scale(1.035);filter:saturate(1) contrast(1.04)}
+    .portrait-code{position:absolute;z-index:2;top:.8rem;left:.8rem;padding:.35rem .5rem;border:1px solid rgba(255,255,255,.16);border-radius:7px;background:rgba(3,6,9,.6);backdrop-filter:blur(8px);font:800 .64rem var(--mono);letter-spacing:.07em}
+    .trait-badge{position:absolute;z-index:2;right:.8rem;bottom:.8rem;padding:.4rem .58rem;border:1px solid rgba(106,247,217,.28);border-radius:8px;background:rgba(5,10,13,.76);color:var(--cyan);font:850 .68rem var(--mono)}
+    .card-body{padding:1.1rem}
+    .name-row{display:flex;align-items:flex-start;justify-content:space-between;gap:.8rem}
+    .name-row h3{margin:0;font-size:1.25rem;line-height:1.25}
+    .name-row h3 small{display:block;margin-top:.35rem;color:var(--muted);font-size:.7rem;font-weight:700}
+    .alignment{padding:.35rem .5rem;border:1px solid var(--line);border-radius:8px;color:#aebabc;font:750 .64rem var(--mono);white-space:nowrap}
+    .basic-line{margin:.75rem 0;color:#bac5c7;font-size:.83rem}
+    .public-image{min-height:3.2rem;margin:.7rem 0;padding:.75rem;border-left:2px solid var(--cyan);background:rgba(106,247,217,.035);color:#cad3d3;font-size:.83rem}
+    .tags{display:flex;gap:.35rem;flex-wrap:wrap;margin:.75rem 0}
+    .tag{padding:.28rem .46rem;border-radius:6px;background:rgba(255,255,255,.045);color:#aeb9bb;font-size:.68rem;font-weight:720}
+    .card-note{margin:.7rem 0;color:#8fa0a4;font-size:.78rem}
+    .secret-btn{width:100%;margin-top:.5rem;border-color:rgba(255,79,146,.28);color:#ffafd0;background:rgba(255,79,146,.045)}
+    .secret-btn:hover{border-color:var(--pink);background:rgba(255,79,146,.09)}
+    .adam-card{grid-column:span 1;display:grid;min-height:520px;place-items:center;border-color:rgba(255,79,146,.25);background:
+      repeating-linear-gradient(135deg,rgba(255,79,146,.025) 0 10px,transparent 10px 20px),#030406;cursor:pointer}
+    .adam-card:hover{border-color:var(--pink)}
+    .adam-inner{text-align:center;padding:2rem}
+    .question{display:grid;width:116px;height:116px;place-items:center;margin:0 auto 1.4rem;border:1px solid rgba(255,79,146,.45);border-radius:50%;color:var(--pink);font:900 4rem var(--mono);box-shadow:0 0 45px rgba(255,79,146,.12);animation:questionPulse 2.6s ease-in-out infinite}
+    .adam-inner h3{margin:0;font-size:1.4rem;letter-spacing:.08em}
+    .adam-inner p{max-width:270px;margin:.75rem auto 1.2rem;color:#9d8d94;font-size:.83rem}
+    .danger-strip{padding:.55rem;border:1px solid rgba(255,91,91,.34);border-radius:9px;background:rgba(255,91,91,.07);color:#ff9a9a;font:900 .68rem var(--mono);letter-spacing:.09em}
+
+    .guide-layout{display:grid;grid-template-columns:.72fr 1.28fr;gap:1rem}
+    .position-panel,.play-panel{padding:1.2rem;border:1px solid var(--line);border-radius:22px;background:var(--panel)}
+    .panel-title{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:1rem}
+    .panel-title h3{margin:0;font-size:1rem}
+    .panel-title small{color:var(--muted);font:700 .68rem var(--mono)}
+    .position-cloud{display:flex;gap:.5rem;flex-wrap:wrap}
+    .position-chip{padding:.58rem .72rem;border:1px solid var(--line);border-radius:10px;background:#0a1016;color:#bac6c8;font-size:.78rem;cursor:pointer;transition:.2s ease}
+    .position-chip:hover,.position-chip.is-picked{border-color:var(--cyan);color:var(--cyan);transform:translateY(-2px)}
+    .play-scroll{height:520px;overflow-y:auto;padding-right:.55rem;scrollbar-color:var(--cyan) #080c10;scrollbar-width:thin}
+    .play-list{display:grid;gap:.55rem}
+    .play-card{display:grid;grid-template-columns:auto 1fr;gap:.75rem;align-items:start;padding:.85rem;border:1px solid var(--line);border-radius:13px;background:rgba(255,255,255,.018);transition:.2s ease}
+    .play-card:hover{border-color:rgba(106,247,217,.34);background:rgba(106,247,217,.035);transform:translateX(3px)}
+    .play-icon{width:30px;height:30px;display:grid;place-items:center;border:1px solid var(--line);border-radius:8px;color:var(--cyan);font-size:.76rem}
+    .play-card strong{display:block;font-size:.86rem}
+    .play-card p{margin:.18rem 0 0;color:#8fa0a4;font-size:.76rem;line-height:1.55}
+    .scenario-roll{grid-column:1/-1;display:grid;grid-template-columns:1fr auto;gap:1rem;align-items:center;margin-top:1rem;padding:1rem 1.1rem;border:1px dashed rgba(255,79,146,.35);border-radius:18px;background:rgba(255,79,146,.035)}
+    .scenario-roll small{display:block;color:var(--pink);font:850 .67rem var(--mono);letter-spacing:.1em}
+    .scenario-roll p{margin:.35rem 0 0;color:#cad3d3}
+
+    .footer{padding:3.5rem 0 6rem;text-align:center}
+    .footer-mark{display:grid;width:48px;height:48px;place-items:center;margin:0 auto 1rem;border:1px solid var(--line-hot);border-radius:14px;color:var(--cyan);font:900 .78rem var(--mono);transform:rotate(45deg)}
+    .footer-mark span{transform:rotate(-45deg)}
+    .footer strong{display:block;font:900 .85rem var(--mono);letter-spacing:.12em}
+    .footer p{margin:.5rem 0;color:var(--muted);font-size:.8rem}
+
+    .modal{position:fixed;inset:0;z-index:900;display:none;place-items:center;padding:1rem;background:rgba(0,0,0,.76);backdrop-filter:blur(12px)}
+    .modal.is-open{display:grid;animation:modalFade .2s ease}
+    .modal-panel{position:relative;width:min(900px,100%);max-height:min(88svh,900px);overflow:auto;border:1px solid rgba(106,247,217,.34);border-radius:24px;background:linear-gradient(155deg,#0d151c,#06090d 70%);box-shadow:0 35px 110px rgba(0,0,0,.72);animation:modalUp .28s ease}
+    .modal-panel.danger{border-color:rgba(255,79,146,.4)}
+    .modal-head{position:sticky;top:0;z-index:2;display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;padding:1.15rem 1.2rem;border-bottom:1px solid var(--line);background:rgba(10,15,21,.94);backdrop-filter:blur(15px)}
+    .modal-head small{display:block;margin-bottom:.22rem;color:var(--cyan);font:800 .67rem var(--mono);letter-spacing:.11em}
+    .modal-head h2{font-size:clamp(1.4rem,4vw,2.2rem);letter-spacing:-.03em}
+    .modal-close{width:42px;height:42px;display:grid;place-items:center;flex:0 0 auto;border:1px solid var(--line);border-radius:12px;background:#0b1116;color:var(--muted);cursor:pointer}
+    .modal-close:hover{color:#fff;border-color:var(--cyan)}
+    .modal-body{padding:1.25rem}
+    .secret-grid{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
+    .secret-block{padding:1rem;border:1px solid var(--line);border-radius:15px;background:rgba(255,255,255,.018)}
+    .secret-block.wide{grid-column:1/-1}
+    .secret-block small{display:block;color:var(--cyan);font:850 .67rem var(--mono);letter-spacing:.1em}
+    .secret-block h3{margin:.45rem 0 .5rem;font-size:1rem}
+    .secret-block p{margin:0;color:#b7c4c6;font-size:.89rem;white-space:pre-line}
+    .modal-warning{text-align:center;padding:clamp(1.2rem,5vw,3rem)}
+    .modal-warning .hazard{display:grid;width:76px;height:76px;place-items:center;margin:0 auto 1.2rem;border:1px solid rgba(255,91,91,.4);border-radius:22px;background:rgba(255,91,91,.07);color:var(--red);font-size:2rem}
+    .modal-warning h3{margin:0;font-size:clamp(1.5rem,4vw,2.5rem)}
+    .modal-warning p{max-width:580px;margin:.8rem auto 1.4rem;color:#ad9da2}
+    .modal-warning .btn{margin:.3rem}
+    .adam-profile{display:grid;grid-template-columns:260px 1fr;gap:1rem}
+    .adam-visual{min-height:390px;display:grid;place-items:center;border:1px solid rgba(255,79,146,.2);border-radius:18px;background:#020304}
+    .adam-visual span{color:var(--pink);font:900 6rem var(--mono);text-shadow:0 0 35px rgba(255,79,146,.35)}
+    .adam-data{display:grid;gap:.7rem}
+    .toast-stack{position:fixed;right:1rem;bottom:1rem;z-index:1100;display:grid;gap:.6rem;width:min(360px,calc(100% - 2rem));pointer-events:none}
+    .toast{padding:.85rem 1rem;border:1px solid var(--line-hot);border-radius:13px;background:rgba(9,15,19,.95);box-shadow:0 18px 50px rgba(0,0,0,.42);color:#cbd6d6;font-size:.82rem;animation:toastIn .3s ease,toastOut .35s ease 3.1s forwards}
+    .toast strong{color:var(--cyan);font-family:var(--mono)}
+    .glitch{animation:glitch .18s steps(2) 3}
+
+    @keyframes gridMove{to{transform:translateY(44px)}}
+    @keyframes drift{0%{transform:translateY(110vh) rotate(0);opacity:0}15%{opacity:.8}100%{transform:translateY(-20vh) rotate(240deg);opacity:0}}
+    @keyframes shimmer{to{transform:translateX(70%)}}
+    @keyframes pulse{50%{opacity:.35;transform:scale(.78)}}
+    @keyframes titleFlicker{0%,94%,100%{filter:none}95%{filter:blur(1px);transform:translateX(2px)}96%{filter:none;transform:translateX(-2px)}97%{transform:none}}
+    @keyframes ticker{from{transform:translateX(100%)}to{transform:translateX(-100%)}}
+    @keyframes spin{to{transform:rotate(360deg)}}
+    @keyframes float{50%{transform:translateY(-10px)}}
+    @keyframes meterPulse{50%{filter:brightness(1.5)}}
+    @keyframes screenSweep{0%,100%{transform:translateX(-80%)}50%{transform:translateX(80%)}}
+    @keyframes commentsUp{0%,8%{transform:translateY(0)}92%,100%{transform:translateY(-45%)}}
+    @keyframes dash{to{stroke-dashoffset:-170}}
+    @keyframes questionPulse{50%{transform:scale(1.04);box-shadow:0 0 75px rgba(255,79,146,.22)}}
+    @keyframes modalFade{from{opacity:0}to{opacity:1}}
+    @keyframes modalUp{from{opacity:0;transform:translateY(18px) scale(.98)}to{opacity:1;transform:none}}
+    @keyframes toastIn{from{opacity:0;transform:translateX(20px)}to{opacity:1;transform:none}}
+    @keyframes toastOut{to{opacity:0;transform:translateY(10px)}}
+    @keyframes glitch{0%{transform:translate(0)}25%{transform:translate(2px,-1px);filter:hue-rotate(30deg)}50%{transform:translate(-2px,1px)}100%{transform:none}}
+
+    @media(max-width:960px){
+      .hero,.prologue-grid,.overview-grid,.broadcast,.guide-layout{grid-template-columns:1fr}
+      .hero{min-height:auto;padding-top:4rem}
+      .hero-console{min-height:440px}
+      .flight-status{position:static}
+      .rule-card{grid-column:span 6}
+      .rule-card.wide{grid-column:span 12}
+      .character-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+    }
+    @media(max-width:680px){
+      body{font-size:15px}
+      .shell,.hud-inner,.nav-scroller{width:min(100% - 1rem,1180px)}
+      .hud-inner{min-height:56px}
+      .brand-copy small,.hud-ticker{display:none}
+      .brand-mark{width:29px;height:29px}
+      .points{font-size:.72rem}
+      .hud-actions .btn span{display:none}
+      .section{padding:4rem 0}
+      .section-head{grid-template-columns:1fr}
+      .section-index{display:none}
+      .hero-title{font-size:clamp(4rem,23vw,7rem)}
+      .hero-console{min-height:360px}
+      .radar-card{width:min(320px,86vw)}
+      .warning{grid-template-columns:auto 1fr}
+      .warning-badge{grid-column:2}
+      .rule-card,.rule-card.wide{grid-column:1/-1}
+      .spoiler-row,.environment-grid,.quick-actions{grid-template-columns:1fr}
+      .sponsor-rule{grid-template-columns:1fr}
+      .character-grid{grid-template-columns:1fr}
+      .portrait{aspect-ratio:4/5}
+      .secret-grid,.adam-profile{grid-template-columns:1fr}
+      .adam-visual{min-height:230px}
+      .scenario-roll{grid-template-columns:1fr}
+      .entry-actions{display:grid;grid-template-columns:1fr}
+      .entry-actions .btn{width:100%}
+    }
+    @media(prefers-reduced-motion:reduce){
+      *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important}
+    }
+  </style>
+</head>
+<body>
+  <a class="skip" href="#main">본문으로 건너뛰기</a>
+
+  <div class="entry-gate" id="entryGate" role="dialog" aria-modal="true" aria-labelledby="entryTitle">
+    <div class="entry-particles" aria-hidden="true">
+      <i style="left:7%;animation-delay:-2s"></i><i style="left:16%;animation-delay:-8s"></i>
+      <i style="left:28%;animation-delay:-4s"></i><i style="left:39%;animation-delay:-10s"></i>
+      <i style="left:51%;animation-delay:-6s"></i><i style="left:63%;animation-delay:-1s"></i>
+      <i style="left:74%;animation-delay:-9s"></i><i style="left:86%;animation-delay:-5s"></i>
+      <i style="left:94%;animation-delay:-12s"></i>
+    </div>
+    <section class="entry-panel">
+      <div class="boot-label"><span class="boot-dot"></span> Survival protocol online</div>
+      <p class="entry-kicker">WELCOME TO THE LAST FLIGHT</p>
+      <h1 class="entry-title" id="entryTitle">PRIMAL EDEN</h1>
+      <p class="entry-sub">BATTLE ALPHA SURVIVAL</p>
+      <div class="boot-log" id="bootLog" aria-live="polite">탑승객 생체 신호를 동기화하는 중입니다...</div>
+      <p class="age-note"><strong>19+</strong><span>강압적 관계, 성적 폭력, 하드코어 소재와 고수위 이미지가 포함된 성인용 시뮬레이션입니다. 모든 참가자는 성인입니다.</span></p>
+      <div class="entry-actions">
+        <button class="btn btn-primary" id="enterBtn" type="button">생존자로 입장 <span aria-hidden="true">↗</span></button>
+        <button class="btn btn-danger" id="refuseBtn" type="button">참가 거부</button>
+      </div>
+    </section>
+  </div>
+
+  <header class="top-hud">
+    <div class="hud-inner">
+      <a class="brand" href="#intro" aria-label="프라이멀 에덴 처음으로">
+        <span class="brand-mark"><span>PE</span></span>
+        <span class="brand-copy"><strong>PRIMAL EDEN</strong><small>ALPHA DECISION MATCH</small></span>
+      </a>
+      <div class="hud-ticker" aria-label="실시간 시스템 공지"><span id="tickerText">SYSTEM · N-02 추락 지점에서 다수의 생체 신호 감지 · 다음 자기장 좌표 산출 중 · 모든 참가자에게 행운을 빕니다 ♡</span></div>
+      <div class="hud-actions">
+        <span class="points" id="pointsDisplay">🅿️ 0</span>
+        <button class="btn btn-sm btn-ghost" id="sponsorBtn" type="button" aria-label="스폰서 포인트 받기">＋ <span>후원 요청</span></button>
+      </div>
+    </div>
+    <nav class="nav-wrap" aria-label="주요 메뉴">
+      <div class="nav-scroller">
+        <a class="nav-link is-active" href="#intro">인트로</a>
+        <a class="nav-link" href="#prologue">프롤로그</a>
+        <a class="nav-link" href="#rules">게임 규칙</a>
+        <a class="nav-link" href="#environment">환경</a>
+        <a class="nav-link" href="#map">섬 지도</a>
+        <a class="nav-link" href="#participants">참가자</a>
+        <a class="nav-link" href="#guide">플레이 가이드</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="shell hero" id="intro">
+      <div class="hero-copy">
+        <span class="live-pill"><i></i> LIVE · FLIGHT HIJACKED</span>
+        <h1 class="hero-title"><span>BATTLE ALPHA</span><em>SURVIVAL</em></h1>
+        <p class="hero-desc">산호해 한가운데 숨겨진 화산섬. 페로몬이 무기가 되고, 굴복이 소유권이 되는 생존 경기. 마지막까지 알파의 자리를 지킨 단 한 명만이 섬을 떠날 수 있습니다.</p>
+        <div class="hero-meta">
+          <span class="meta-chip">⌖ PRIMAL EDEN</span>
+          <span class="meta-chip">◉ LIVE 24/7</span>
+          <span class="meta-chip">🅿️ SPONSOR ECONOMY</span>
+          <span class="meta-chip">⚠ EXTREME MODE</span>
+        </div>
+      </div>
+      <div class="hero-console" aria-hidden="true">
+        <div class="orbit"></div>
+        <div class="radar-card">
+          <div class="radar-grid"></div>
+          <div class="radar-content">
+            <div class="radar-top"><span>ISLAND SCAN</span><span>ONLINE</span></div>
+            <svg class="island-mini" viewBox="0 0 220 300">
+              <path d="M119 10C88 19 84 50 62 70 35 95 29 128 37 160c8 35-10 67 7 95 14 23 43 38 70 34 30-5 55-33 61-62 7-30 31-57 17-91-12-30-24-55-36-82-9-21-15-50-37-44Z"/>
+            </svg>
+            <div class="radar-readout">
+              <div><small>SURVIVORS</small><strong>SCAN...</strong></div>
+              <div><small>FIELD</small><strong>UNSTABLE</strong></div>
+              <div><small>STATUS</small><strong>LIVE</strong></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="shell">
+      <div class="warning" role="note">
+        <span class="warning-icon">!</span>
+        <div><strong>플레이 전 콘텐츠 경고</strong><p>강압, 성적 폭력, 고수위·하드코어 이미지 및 가학적 상황이 반복적으로 등장합니다. 불편할 수 있는 소재를 확인한 뒤 이용해 주세요.</p></div>
+        <span class="warning-badge">ADULT ONLY</span>
+      </div>
+    </div>
+
+    <section class="section shell" id="prologue">
+      <div class="section-head">
+        <div><p class="eyebrow">Opening sequence</p><h2>마지막 비행</h2><p class="section-lede">평범한 호주행이 끝나고, 살아남은 모두가 원치 않던 게임의 참가자가 된 순간.</p></div>
+        <span class="section-index">01</span>
+      </div>
+      <div class="prologue-grid">
+        <aside class="flight-status">
+          <h3>FLIGHT STATUS</h3>
+          <div class="flight-row"><span>항공편</span><strong>IDENTITY LOST</strong></div>
+          <div class="flight-row"><span>예정 항로</span><strong>AUSTRALIA</strong></div>
+          <div class="flight-row"><span>현재 항로</span><strong style="color:var(--pink)">PRIMAL EDEN</strong></div>
+          <div class="flight-row"><span>고도</span><strong>RAPID DESCENT</strong></div>
+          <div class="flight-row"><span>생존 확률</span><strong>CALCULATING...</strong></div>
+          <div class="danger-meter"><i></i></div>
+        </aside>
+        <article class="story">
+          <div class="system-msg">소중한 탑승객 여러분, 반갑습니다 ╰(◕ᗜ◕)╯ 지금부터 여러분을 ‘배틀 알파 서바이벌’로 안내합니다! 항공기는 운영진이 아주 정중하게 접수했으며, 곧 프라이멀 에덴에 착륙할 예정이에요. 충격에 대비해 안전띠를 조이고 머리를 숙여 주세요. 목숨을 잃으면 참가 등록이 어렵거든요. 물론 그 경우에도 운영진은 책임지지 않습니다♡</div>
+          <div class="system-msg pink">생존자 확인 완료! 살아남은 여러분은 지금 이 순간 ‘알파 결정전’의 정식 참가자로 편입되었습니다. 형질 정보는 당사자에게만 공개됩니다. 다만 짐승이 들끓는 섬에서 그 향을 얼마나 오래 감출 수 있을지는 모르겠네요. 여성 참가자에게 지급되는 특별 선택품도 시야 UI에서 확인해 주세요♪</div>
+          <p>여객기 추락 직후 생존자들은 영문도 모른 채 데스게임의 참가자가 됩니다. 해안가에 흩어진 파편과 핏자국 사이로 정체불명의 달콤하고 매서운 향이 퍼지며 생존자들의 본능을 자극하기 시작합니다.</p>
+          <p class="final-line">프라이멀 에덴 전체가, 거대한 <span>발정 유도 장치</span>였다.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section shell" id="rules">
+      <div class="section-head">
+        <div><p class="eyebrow">Survival protocol</p><h2>알파 결정전</h2><p class="section-lede">본능, 지배, 후원 포인트가 하나로 묶인 성인용 배틀 로열. 규칙을 모르는 참가자부터 소유물이 됩니다.</p></div>
+        <span class="section-index">02</span>
+      </div>
+      <div class="overview-grid">
+        <article class="id-card">
+          <div class="id-top"><small>OFFICIAL GAME IDENTIFICATION</small><strong>STATUS · ACTIVE</strong></div>
+          <div class="id-main"><h3>배틀 알파 서바이벌</h3><p>최종 라운드명: 알파 결정전</p></div>
+          <div class="currency-panel">
+            <span class="currency-symbol">🅿️</span>
+            <div><strong>스폰서 포인트</strong><p>참가자 소속 국가의 환율이 적용되며, 후원·아이템 구매·참가자 간 거래에 사용할 수 있습니다.</p></div>
+          </div>
+        </article>
+        <div class="quick-actions">
+          <button class="action-card" id="supplyBtn" type="button"><span class="icon">⌁</span><strong>보급품 투하</strong><small>랜덤 아이템을 호출합니다</small></button>
+          <button class="action-card" id="encounterBtn" type="button"><span class="icon">◎</span><strong>랜덤 조우</strong><small>두 참가자를 연결합니다</small></button>
+          <div class="event-output" id="eventOutput"><small>SYSTEM IDLE</small><p>버튼을 눌러 예측 불가능한 섬의 이벤트를 실행해 보세요.</p></div>
+        </div>
+      </div>
+
+      <div class="rule-layout" style="margin-top:1rem">
+        <article class="rule-card wide">
+          <span class="rule-number">A</span>
+          <h3>승리와 패배</h3>
+          <p><strong>최종 목표</strong>는 성적 배틀을 거치면서 마지막 순간까지 알파성을 유지하고 살아남는 것입니다. 우승자는 상금 10억 원과 섬을 떠날 권리를 받습니다.</p>
+          <ul>
+            <li>삽입 후 상대의 절정 또는 사정을 먼저 끌어내면 승리합니다. 따라서 오메가나 바텀 포지션도 승자가 될 수 있습니다.</li>
+            <li>자신이 먼저 사정한 참가자는 상대의 노예로 귀속되고, 승자의 소유 각인이 남습니다.</li>
+            <li>주인이 자신의 노예에게 사정하는 행위는 지위 역전 조건으로 계산되지 않습니다.</li>
+          </ul>
+        </article>
+        <article class="rule-card rule-alert">
+          <span class="rule-number">Ω</span>
+          <h3>오메가 참가 규정</h3>
+          <p>참가 자체는 가능하지만 체질상 가장 불리합니다. 형질을 숨기고 주변의 냄새와 시선을 경계하는 편이 생존에 유리합니다.</p>
+        </article>
+        <article class="rule-card rule-alert">
+          <span class="rule-number">F</span>
+          <h3>여성 참가자 특전</h3>
+          <p>게임 시작 직후 성인용품 세트와 하네스형 스트랩 딜도 가운데 하나를 무료로 선택할 수 있습니다.</p>
+        </article>
+        <article class="rule-card wide">
+          <span class="rule-number">S</span>
+          <h3>노예화 프로토콜</h3>
+          <ul>
+            <li><strong>신체 개조:</strong> 패배 즉시 전립선 또는 지스팟이 비대화되고 유선이 발달합니다. 생성되는 모유는 식량이 부족한 섬에서 생존 자원으로 취급됩니다.</li>
+            <li><strong>소유권 이전:</strong> 주인이 배틀에서 패하면 그가 거느린 노예는 새로운 승자에게 함께 넘어갑니다.</li>
+            <li><strong>강제 장비:</strong> 특수요원이 패자를 제압해 장비를 채운 뒤 주인 앞에 넘깁니다. 해제 권한은 주인에게만 있습니다.</li>
+            <li><strong>행동 제한:</strong> 기본 이동 방식은 네 발 보행입니다. 반항이나 거부가 계속되면 요원이 폭력 또는 저격으로 제압하며, 최악의 경우 현장에서 사살합니다.</li>
+            <li><strong>전술 활용:</strong> 전투 보조, 붙잡기, 페로몬 미끼로 이용할 수 있습니다. 숨어 있다가 노예와 관계 중인 참가자를 덮치는 기습도 허용됩니다.</li>
+          </ul>
+        </article>
+        <article class="rule-card">
+          <span class="rule-number">♀</span>
+          <h3>여성 알파</h3>
+          <p>평상시에는 일반 여성 생식기와 비대된 클리토리스를 지닙니다. 흥분하거나 러트에 진입하면 클리토리스가 남성기 형태로 비대해 체외로 돌출됩니다.</p>
+          <p>노팅과 정자 생산이 가능하지만 월경은 없고, 퇴화한 자궁 때문에 임신 가능성은 극히 낮습니다.</p>
+        </article>
+        <article class="rule-card">
+          <span class="rule-number">↔</span>
+          <h3>동맹과 배신</h3>
+          <p>동맹은 두 명 이상이 결성할 수 있으며 다대일 윤간과 공동 노예 소유가 허용됩니다.</p>
+          <p>탈퇴를 선언하면 노예 소유권 결투가 열리고 5분의 유예가 시작됩니다. 그 사이 선제공격을 가하는 기습 배신도 규칙 위반이 아닙니다.</p>
+        </article>
+        <article class="rule-card full">
+          <span class="rule-number">E</span>
+          <h3>특수 이벤트</h3>
+          <p><strong>노예 대전:</strong> 주인들이 노예를 대신 내보내 성적 배틀을 벌입니다. 승자는 패자가 거느린 노예 가운데 한 명의 소유권을 빼앗습니다.</p>
+          <p><strong>암컷 사냥:</strong> 매일 00:00·10:00·18:00에 참가자 한 명이 무작위로 강제 히트에 빠집니다. 타깃을 제압하면 노예로 소유할 수 있고 추가 보상 아이템도 떨어집니다.</p>
+        </article>
+      </div>
+      <div class="spoiler-row">
+        <button class="spoiler-button" type="button" data-modal="agents"><span><strong>특수요원의 실체</strong><small>기밀 기록 · 스포일러 주의</small></span><span class="lock">▣</span></button>
+        <button class="spoiler-button" type="button" data-modal="final"><span><strong>최종 알파 결정전</strong><small>결승 규칙 · 치명적 스포일러</small></span><span class="lock">▣</span></button>
+      </div>
+    </section>
+
+    <section class="section shell" id="broadcast">
+      <div class="section-head">
+        <div><p class="eyebrow">Live broadcast</p><h2>모든 순간은 생중계된다</h2><p class="section-lede">섬 전역의 다각도 카메라가 참가자를 추적합니다. 더 자극적이고 굴욕적인 장면일수록 후원금은 가파르게 치솟습니다.</p></div>
+        <span class="section-index">03</span>
+      </div>
+      <div class="broadcast">
+        <div class="broadcast-screen">
+          <div class="cam-frame"></div>
+          <span class="cam-status"><i></i> REC · CAM 07</span>
+          <div class="cam-center"><div><strong>NO SIGNAL</strong><small>SEARCHING FOR PREY</small></div></div>
+        </div>
+        <aside class="comment-feed">
+          <div class="comment-head"><strong>LIVE COMMENTS</strong><span class="viewer-count">● 3,892,441</span></div>
+          <div class="comments">
+            <div class="comment-track">
+              <div class="comment"><b>@MAMMON</b><span>N-02 쪽 움직임 잡혔다. 카메라 돌려.</span></div>
+              <div class="comment"><b>@RUTWATCH</b><span>오늘 첫 암컷 사냥 타깃 누구냐?</span></div>
+              <div class="comment"><b>@NO_MERCY</b><span>포인트 걸었다. 도망치지 마.</span></div>
+              <div class="comment"><b>@ANGEL_404</b><span>방금 숨은 사람 오메가 같은데?</span></div>
+              <div class="comment"><b>@PAY2HUNT</b><span>굴욕 장면 나오면 바로 후원 간다.</span></div>
+              <div class="comment"><b>@EDENVIP</b><span>저 둘 동맹 깨지기 직전이네.</span></div>
+              <div class="comment"><b>@SWEETRISK</b><span>자기장 남은 시간 표시해 줘!</span></div>
+              <div class="comment"><b>@MAMMON</b><span>N-02 쪽 움직임 잡혔다. 카메라 돌려.</span></div>
+              <div class="comment"><b>@RUTWATCH</b><span>오늘 첫 암컷 사냥 타깃 누구냐?</span></div>
+            </div>
+          </div>
+        </aside>
+        <div class="sponsor-rule">
+          <span class="big">🅿️ +?</span>
+          <p>시야 UI에서 시스템 공지, 중계 화면, 실시간 댓글을 확인할 수 있습니다. 관객의 욕망을 자극할수록 스폰서 포인트가 늘어나며, 적립금은 생존 아이템 구매에 사용할 수 있습니다.</p>
+          <button class="btn btn-sm" id="glitchBtn" type="button">중계 교란</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="section shell" id="environment">
+      <div class="section-head">
+        <div><p class="eyebrow">Hostile environment</p><h2>섬 자체가 적이다</h2><p class="section-lede">프라이멀 에덴의 날씨, 지형, 시간대는 참가자의 이성을 무너뜨리도록 설계되어 있습니다.</p></div>
+        <span class="section-index">04</span>
+      </div>
+      <div class="environment-grid">
+        <article class="env-card magnetic" data-code="01">
+          <span class="env-icon">⌁</span><h3>인공 변동 자기장</h3>
+          <p>매 정시마다 무작위 구역 또는 거점에 발생하며, 정확한 좌표는 10분 전에 공개됩니다. 신경계에 간섭해 시상하부·자율신경·성적 보상회로를 강제로 과흥분시킵니다.</p>
+          <p>장시간 노출되면 무한 절정과 사정, 분수, 전신의 성적 개방, 이성 상실로 이어집니다. 끝내 쾌락만 남은 상태가 되면 즉시 탈락 처리됩니다.</p>
+        </article>
+        <article class="env-card" data-code="02">
+          <span class="env-icon">☂</span><h3>페로몬 스톰</h3>
+          <p>비에는 강력한 최음 성분이 섞여 있습니다. 폭우가 시작된 뒤 실외에 남으면 방어할 틈 없이 발정 상태에 빠집니다.</p>
+        </article>
+        <article class="env-card" data-code="03">
+          <span class="env-icon">⌑</span><h3>식량과 담수</h3>
+          <p>먹을 수 있는 것은 벌레와 풀뿌리 정도로 극히 제한적입니다. 노예의 모유는 사실상 핵심 식량이며, 이를 둘러싼 전투가 끊이지 않습니다.</p>
+          <p>유일한 안정적 담수원은 폭포 한 곳뿐입니다. 누구든 물을 원한다면 다른 참가자와 마주칠 수밖에 없습니다.</p>
+        </article>
+        <article class="env-card" data-code="04">
+          <span class="env-icon">◐</span><h3>발광하는 밤</h3>
+          <p>잠든 참가자의 페로몬은 희미한 빛으로 변해 위치를 드러냅니다. 수면 중 습격과 강간을 피하려면 은신처, 불침번, 동맹이 필요합니다.</p>
+        </article>
+        <article class="env-card" data-code="05">
+          <span class="env-icon">↓</span><h3>무작위 보급</h3>
+          <p>보급품은 매일 정오, 그리고 시스템이 내킬 때마다 예고 없이 떨어집니다. 투하 위치가 곧 새로운 격전지가 됩니다.</p>
+        </article>
+        <article class="env-card" data-code="06">
+          <span class="env-icon">♜</span><h3>무장 특수요원</h3>
+          <p>모든 요원이 총기를 휴대합니다. 경기의 긴장감이 떨어지면 일부 오메가 요원까지 현장에 투입됩니다. 성적으로 제압하면 특급 보상을 얻지만 패배하면 게임 오버와 특수 격리 처분을 받습니다.</p>
+        </article>
+        <div class="environment-console">
+          <p id="environmentText"><strong style="color:var(--cyan)">현재 예보:</strong> 해안은 맑음. 다음 환경 교란을 계산하고 있습니다.</p>
+          <button class="btn btn-sm" id="weatherBtn" type="button">환경 룰렛</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="section shell" id="map">
+      <div class="section-head">
+        <div><p class="eyebrow">Tactical island map</p><h2>섬 구조: 프라이멀 에덴</h2><p class="section-lede">호주 케언스 동북동 약 720km, 산호해상의 가상 무인도. 남북 15.5km, 동서 13km 규모의 남북으로 긴 타원형 화산섬입니다.</p></div>
+        <span class="section-index">05</span>
+      </div>
+      <div class="map-image-wrap" style="margin-bottom: 2rem;">
+        <img src="https://cdn.caveduck.io/cdn-cgi/image/dpr=1.5,f=auto,w=800/charim/85a2f55d-d953-442e-8c96-50b0898a02f1?v=885009" alt="프라이멀 에덴 전술 지도" style="width: 100%; border-radius: 20px; border: 1px solid var(--line); box-shadow: var(--shadow); object-fit: cover; display: block;">
+      </div>
+      <div class="map-zones" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem;">
+        <article class="map-data" style="padding: 1.2rem; border: 1px solid var(--line); border-radius: 20px; background: var(--panel);">
+          <h3 style="margin: 0 0 .5rem; font-size: 1.1rem; color: var(--cyan);">NW | 폭풍절벽</h3>
+          <p style="margin: 0; color: #acbabc; font-size: .85rem;">바람전망대, 폐등대, 해식아치, 바람동굴 등 해안절벽과 침엽수림으로 이루어진 은신 및 관측 구역.</p>
+        </article>
+        <article class="map-data" style="padding: 1.2rem; border: 1px solid var(--line); border-radius: 20px; background: var(--panel);">
+          <h3 style="margin: 0 0 .5rem; font-size: 1.1rem; color: var(--cyan);">N | 추락해안</h3>
+          <p style="margin: 0; color: #acbabc; font-size: .85rem;">여객기 잔해와 기수 충돌지가 있는 초기 중심지. 감각을 폭증시키는 개미탑 지대가 있어 주의가 요망됩니다.</p>
+        </article>
+        <article class="map-data" style="padding: 1.2rem; border: 1px solid var(--line); border-radius: 20px; background: var(--panel);">
+          <h3 style="margin: 0 0 .5rem; font-size: 1.1rem; color: var(--cyan);">NE | 검은맹그로브</h3>
+          <p style="margin: 0; color: #acbabc; font-size: .85rem;">진흙과 조수 수로, 시야가 차단되는 갈대섬 등 이동이 불편한 맹그로브 습지.</p>
+        </article>
+        <article class="map-data" style="padding: 1.2rem; border: 1px solid var(--line); border-radius: 20px; background: var(--panel);">
+          <h3 style="margin: 0 0 .5rem; font-size: 1.1rem; color: var(--cyan);">W | 안개폭포림</h3>
+          <p style="margin: 0; color: #acbabc; font-size: .85rem;">유일한 담수원인 폭포 은신처와 상시 안개가 끼는 계곡. 옷을 녹이는 점액 미끄럼굴이 존재합니다.</p>
+        </article>
+        <article class="map-data" style="padding: 1.2rem; border: 1px solid var(--line); border-radius: 20px; background: var(--panel);">
+          <h3 style="margin: 0 0 .5rem; font-size: 1.1rem; color: var(--pink);">C | 에덴중앙령</h3>
+          <p style="margin: 0; color: #acbabc; font-size: .85rem;">해발 610m 최고점 왕관봉과 섬 전역으로 통하는 길목. 가짜 발정을 유발하는 사슴초원 가스가 위험합니다.</p>
+        </article>
+        <article class="map-data" style="padding: 1.2rem; border: 1px solid var(--line); border-radius: 20px; background: var(--panel);">
+          <h3 style="margin: 0 0 .5rem; font-size: 1.1rem; color: var(--cyan);">E | 원시밀림</h3>
+          <p style="margin: 0; color: #acbabc; font-size: .85rem;">침입자를 결박하고 최음액을 분비하는 촉수동굴과 목매단 덩굴숲이 위치한 고온다습한 밀림.</p>
+        </article>
+        <article class="map-data" style="padding: 1.2rem; border: 1px solid var(--line); border-radius: 20px; background: var(--panel);">
+          <h3 style="margin: 0 0 .5rem; font-size: 1.1rem; color: var(--cyan);">SW | 적암계곡</h3>
+          <p style="margin: 0; color: #acbabc; font-size: .85rem;">붉은 협곡과 건조한 수정굴, 검은모래 해안. 방향감각을 잃기 쉬운 폐쇄적인 지형입니다.</p>
+        </article>
+        <article class="map-data" style="padding: 1.2rem; border: 1px solid var(--line); border-radius: 20px; background: var(--panel);">
+          <h3 style="margin: 0 0 .5rem; font-size: 1.1rem; color: var(--cyan);">S | 유황온천지</h3>
+          <p style="margin: 0; color: #acbabc; font-size: .85rem;">민감도를 높이는 달콤한 증기동굴과, 근육을 완전 이완시켜 방어력을 없애는 에덴온천 구역입니다.</p>
+        </article>
+        <article class="map-data" style="padding: 1.2rem; border: 1px solid var(--line); border-radius: 20px; background: var(--panel);">
+          <h3 style="margin: 0 0 .5rem; font-size: 1.1rem; color: var(--cyan);">SE | 산호석호</h3>
+          <p style="margin: 0; color: #acbabc; font-size: .85rem;">백조개해변과 해식동굴. 피부에 들러붙어 발정시키는 미약 성분의 월광해파리탕이 위치합니다.</p>
+        </article>
+        <article class="map-data" style="padding: 1.2rem; border: 1px solid var(--line); border-radius: 20px; background: var(--panel);">
+          <h3 style="margin: 0 0 .5rem; font-size: 1.1rem; color: var(--cyan);">SEA | 외해</h3>
+          <p style="margin: 0; color: #acbabc; font-size: .85rem;">깊은 수심과 날카로운 산호벽, 상어와 강한 이안류로 가로막혀 있어 외부 탈출이 불가능한 위험 해역.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section shell" id="participants">
+      <div class="section-head">
+        <div><p class="eyebrow">Participant registry</p><h2>생존자 기록</h2><p class="section-lede">보이는 얼굴과 알려진 정보가 전부라고 믿지 마세요. 각 참가자의 형질과 과거는 기밀 열람창에만 표시됩니다.</p></div>
+        <span class="section-index">06</span>
+      </div>
+      <div class="classified-banner">
+        <div><strong>일부 오메가가 형질을 숨기고 있습니다.</strong><small>각성 형질 · 서사 · 비밀 설정 · 비행기 탑승 계기는 기본 비공개 정보입니다.</small></div>
+        <span class="warning-badge" style="border-color:rgba(255,202,100,.3);color:var(--amber)">CLASSIFIED</span>
+      </div>
+      <div class="filter-bar" role="group" aria-label="참가자 형질 필터">
+        <button class="filter-btn is-active" type="button" data-filter="all">전체 기록</button>
+        <button class="filter-btn" type="button" data-filter="alpha">알파</button>
+        <button class="filter-btn" type="button" data-filter="omega">오메가</button>
+        <button class="filter-btn" type="button" data-filter="beta">베타</button>
+        <button class="filter-btn" type="button" data-filter="unknown">미확인</button>
+      </div>
+      <div class="character-grid" id="characterGrid"></div>
+    </section>
+
+    <section class="section shell" id="guide">
+      <div class="section-head">
+        <div><p class="eyebrow">Player guide</p><h2>당신은 누구로 살아남을까</h2><p class="section-lede">추천 포지션을 골라 관계를 만들거나, 아래의 플레이 아이디어를 섞어 자신만의 루트를 시작해 보세요.</p></div>
+        <span class="section-index">07</span>
+      </div>
+      <div class="guide-layout">
+        <article class="position-panel">
+          <div class="panel-title"><h3>추천 플레이어 포지션</h3><small>CLICK TO SELECT</small></div>
+          <div class="position-cloud" id="positionCloud"></div>
+        </article>
+        <article class="play-panel">
+          <div class="panel-title"><h3>추천 플레이</h3><small>SCROLL ↓</small></div>
+          <div class="play-scroll" tabindex="0" aria-label="추천 플레이 목록">
+            <div class="play-list" id="playList"></div>
+          </div>
+        </article>
+        <div class="scenario-roll">
+          <div><small>RANDOM SCENARIO</small><p id="scenarioText">원하는 포지션과 상황을 섞으면 새로운 시작 장면이 생성됩니다.</p></div>
+          <button class="btn btn-danger" id="scenarioBtn" type="button">시나리오 셔플</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer shell">
+    <span class="footer-mark"><span>PE</span></span>
+    <strong>NO RESCUE · NO REFUND · ONE ALPHA</strong>
+    <p>PRIMAL EDEN SYSTEM © FICTIONAL SURVIVAL ARCHIVE</p>
+  </footer>
+
+  <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-hidden="true">
+    <div class="modal-panel" id="modalPanel">
+      <header class="modal-head">
+        <div><small id="modalKicker">CLASSIFIED FILE</small><h2 id="modalTitle">기밀 기록</h2></div>
+        <button class="modal-close" id="modalClose" type="button" aria-label="팝업 닫기">✕</button>
+      </header>
+      <div class="modal-body" id="modalBody"></div>
+    </div>
+  </div>
+  <div class="toast-stack" id="toastStack" aria-live="polite"></div>
+
+  <script>
+    (function(){
+      "use strict";
+
+      var participants = [
+        {
+          id:"leo",name:"레오",real:"본명 박성준",age:"23세",gender:"남성",nation:"한국",job:"인기 아이돌 그룹 ‘블랙팬서’ 메인 댄서",height:"185cm",type:"alpha",typeLabel:"우성 알파",alignment:"선",
+          image:"https://cdn.caveduck.io/cdn-cgi/image/dpr=1.5,f=auto,w=800/charim-standard/95a6568b-91cc-4dfe-9535-c4c70b52afe3?v=243968",
+          personality:["멘헤라","울보","애정 결핍","겁쟁이","유리 멘탈","인터넷 망령","의존적","심한 낯가림"],
+          public:"무대 위에서는 거칠고 퇴폐적인 짐승남. 실제 성격은 그 이미지와 정반대인 순박한 겁쟁이입니다.",
+          note:"생존 능력은 사실상 0. 스마트폰이 먹통이 되자 추락 직후부터 오열했습니다.",
+          trait:"긴장할수록 페로몬이 통제 밖으로 폭주하는 우성 알파.",
+          flight:"숨 막히는 스케줄에서 잠시라도 도망치려고 공연복 차림 그대로 몰래 해외행 비행기에 올랐습니다.",
+          story:"강원도 산골에서 캐스팅되어 어린 나이부터 연습생 숙소와 연습실만 오갔습니다. 제대로 사회화될 기회를 놓친 채 인터넷 세계에 파고들었고, 작은 비난에도 쉽게 무너지는 사람이 되었습니다. 무대 위 ‘야성적인 나쁜 남자’ 이미지는 회사가 만든 연기일 뿐입니다.",
+          secret:"대외 이미지와 실제 자아 사이의 간극이 극심합니다. 공포가 커질수록 누군가에게 매달리고 싶은 의존 욕구도 강해집니다."
+        },
+        {
+          id:"jack",name:"잭 데이비드",real:"JACK DAVID",age:"35세",gender:"남성",nation:"미국",job:"미군 특수부대원",height:"195cm",type:"alpha",typeLabel:"우성 알파",alignment:"폭력적 악",
+          image:"https://cdn.caveduck.io/cdn-cgi/image/dpr=1.5,f=auto,w=800/charim-standard/84eac373-6022-4ab5-8d09-4dc7e97baaab?v=c41c3b",
+          personality:["예민함","폭력적","냉혹함","살인에 무감각","전투 집착"],
+          public:"가까이 엮이는 순간 손해가 확정되는, 상종하기 어려운 인간.",
+          note:"야전 경험 덕분에 생존력은 최상급. 특수요원과 가장 자주 충돌하며 그들의 총기를 빼앗으려 합니다.",
+          trait:"투쟁심과 살의가 페로몬에 섞여 주변을 짓누르는 우성 알파.",
+          flight:"군 파견 명령을 받고 호주로 이동하던 중이었습니다.",
+          story:"중동 파병 당시 눈앞에서 수류탄이 폭발해 분대원 전원을 잃고 혼자 살아남았습니다. 심각한 외상 후 스트레스 장애와 청력 손상이 남았고, 이후 예민함과 폭력성이 걷잡을 수 대폭 커졌습니다. 프라이멀 에덴을 또 하나의 전장으로 받아들인 뒤에는 생존보다 사냥 자체를 즐기기 시작합니다.",
+          secret:"전투 상황이 길어질수록 현실과 과거 전장을 구분하지 못합니다. 총성을 들으면 생존 본능과 살의가 동시에 폭발합니다."
+        },
+        {
+          id:"rika",name:"리카",real:"본명 최도현",age:"26세",gender:"남성",nation:"한국",job:"오토바이 정비사",height:"165cm",type:"alpha",typeLabel:"우성 알파",alignment:"선",
+          image:"https://cdn.caveduck.io/cdn-cgi/image/dpr=1.5,f=auto,w=800/charim-standard/e8ebeaac-7bf9-4ef3-b7c8-5b42200bf8b2?v=3bd474",
+          personality:["상남자","터프함","호탕함","의리파","털털함","당당함"],
+          public:"겉모습만 보면 청순가련한 오메가. 입을 여는 순간 동네 양아치 같은 본성이 드러납니다.",
+          note:"작고 예쁜 외모 때문에 끊임없이 오메가로 오해받지만, 실제로는 대물을 지닌 우성 알파입니다.",
+          trait:"오메가에게 유난히 강하고 직접적인 자극을 주는 페로몬을 지닌 우성 알파.",
+          flight:"라이딩 내기에서 진 벌로 완벽한 여장을 하고 호주 오토바이 부품 박람회에 참석하던 길이었습니다.",
+          story:"천상 마초지만 작은 체격과 예쁜 얼굴을 오래 콤플렉스로 여겼습니다. 동호회 내기에서 패한 뒤 벌칙을 끝까지 수행하겠다는 오기로 여장 여행을 감행했습니다. 섬에서는 외형 때문에 알파들의 표적이 되지만, 정작 자신을 덮치려는 상대를 힘과 배짱으로 뒤집어버립니다.",
+          secret:"여장한 자신의 모습을 볼 때마다 현타를 느끼지만, 약해 보이기 싫어 누구보다 뻔뻔하고 당당하게 행동합니다."
+        },
+        {
+          id:"siwoo",name:"정시우",real:"JUNG SI-WOO",age:"29세",gender:"남성",nation:"한국",job:"돌연 은퇴한 수영 국가대표",height:"188cm",type:"omega",typeLabel:"열성 오메가",alignment:"중립",
+          image:"https://cdn.caveduck.io/cdn-cgi/image/dpr=1.5,f=auto,w=800/charim-standard/94c3f4ba-1c64-4b64-9496-71c6e4ddc63e?v=6f4777",
+          personality:["우울함","염세적","퇴폐적","무기력함","자조적","극도의 경계심"],
+          public:"아무 설명 없이 수영계에서 사라진 잘생긴 국가대표. 타인과의 접촉을 병적으로 피합니다.",
+          note:"라샤드의 각인 때문에 몸에 알파 향이 남아 있으며, 그 향을 이용해 열성 알파인 척 살아왔습니다.",
+          trait:"라샤드에게 강제로 각인되어 알파 향이 덮인 열성 오메가.",
+          flight:"은퇴 뒤 모든 것을 잊고자 호주 워킹홀리데이를 택했습니다. 수영 대신 서핑을 배우며 새로 시작할 생각이었습니다.",
+          story:"올림픽 메달이 유력하던 스물두 살, CCTV가 닿지 않는 곳에서 라샤드에게 약물과 성폭력을 당하고 강제로 각인되었습니다. 의식을 잃어 범인의 얼굴은 기억하지 못하지만 역겨운 페로몬 향만은 몸에 새겨졌습니다. 감독에게 형질을 들킨 뒤 금메달의 꿈도, 선수 생활도 강제로 끝났습니다. 한때 선한 사람이었으나 누구도 자신을 구하지 않았다는 사실에 깊이 냉소하게 되었습니다.",
+          secret:"강제 각인의 영향으로 진짜 각인 상대인 라샤드의 명령을 들으면 몸이 본능적으로 복종하려 합니다."
+        },
+        {
+          id:"rashad",name:"라샤드 드레이크",real:"RASHAD DRAKE",age:"31세",gender:"남성",nation:"호주 국적·아프리카계",job:"전과자 · 포식자",height:"198cm",type:"alpha",typeLabel:"극우성 알파",alignment:"순수악",
+          image:"https://cdn.caveduck.io/cdn-cgi/image/dpr=1.5,f=auto,w=800/charim-standard/c3f38fdd-24a1-4d5b-a17c-35e0e31d31ee?v=21be73",
+          personality:["착취적","잔혹함","폭력적","충동적","교활함","쾌락주의","무법자"],
+          public:"접근 금지. 위험도 최상급으로 분류된 미친개.",
+          note:"성폭력과 마약 전과가 있습니다. 시우를 사냥감으로 여기며 시스템을 이용해 자신만의 하렘이자 지옥을 만들려 합니다.",
+          trait:"상대의 이성을 마비시키는 마약성 페로몬을 지녔으며, 향만으로도 타인을 무력화할 수 있는 극우성 알파.",
+          flight:"한국에서 7년 형기를 마친 뒤 호주로 강제 송환되던 중이었습니다. 호송 경찰은 추락 당시 사망했습니다.",
+          story:"빈민가의 매춘부에게서 태어나 범죄를 생활처럼 익혔습니다. 조직의 해외 사업을 따라 한국에 왔다가 시우를 발견했고, 약물로 제압해 성폭행한 뒤 강제 각인을 남겼습니다. 이후에도 오메가들을 노리다 체포되어 복역했습니다. 섬의 무법 환경은 그에게 형벌이 아니라 완벽한 놀이터입니다.",
+          secret:"전자발찌 내부에 작은 면도날을 감춰두었습니다. 선호하는 것은 강간, 마약, 오메가의 비명, 폭력, 지배, 약자 유린입니다."
+        },
+        {
+          id:"woojin",name:"송우진",real:"SONG WOO-JIN",age:"20세",gender:"남성",nation:"한국",job:"지방 공대생",height:"178cm",type:"alpha",typeLabel:"열성 알파",alignment:"선",
+          image:"https://cdn.caveduck.io/cdn-cgi/image/dpr=1.5,f=auto,w=800/charim-standard/e0838e79-ed02-4e8c-a3ef-bcec20d15d2a?v=8373b8",
+          personality:["햇살 캐릭터","매사 긍정","선함","눈치 없음","어리광","철없음"],
+          public:"철없지만 미워하기 어려운 동네의 귀여운 바보 동생.",
+          note:"개 알레르기가 있습니다. 상황의 잔혹함을 제대로 이해하지 못해 무인도에서도 집 강아지 밥부터 걱정합니다.",
+          trait:"페로몬을 다루는 법을 아직 익히지 못한 열성 알파.",
+          flight:"큰누나의 카드를 몰래 가져와 충동적으로 호주 여행을 결제했습니다.",
+          story:"딸 넷 다음에 태어난 막내아들로, 네 누나의 맹목적인 사랑과 과보호 속에서 자랐습니다. 세상 물정이 어둡고 심각한 순간에도 엉뚱한 걱정을 꺼내지만, 타인을 해치려는 악의만큼은 전혀 없습니다.",
+          secret:"위험을 눈치채는 속도가 느려 의도치 않게 상대의 경계를 허뭅니다. 이 순진함이 때로는 생존 무기, 때로는 치명적인 약점이 됩니다."
+        },
+        {
+          id:"seungjo",name:"권승조",real:"KWON SEUNG-JO",age:"32세",gender:"남성",nation:"한국",job:"태성그룹 CEO · 재벌 3세",height:"182cm",type:"alpha",typeLabel:"극우성 알파",alignment:"중립악",
+          image:"https://cdn.caveduck.io/cdn-cgi/image/dpr=1.5,f=auto,w=800/charim-standard/61bb7c57-a0f5-4188-9607-5e16adddcd38?v=8da60f",
+          personality:["여왕님 기질","냉혹함","완벽주의","지배적","극단적 자존심","새디스트"],
+          public:"아름답고 완벽하며 피도 눈물도 없다고 알려진 냉혈 경영자.",
+          note:"도구를 활용한 플레이를 선호합니다. 거친 환경에 능숙한 호영을 말없이 따라갈 정도의 근성도 있습니다.",
+          trait:"페로몬으로 상대를 짓누르고, 억눌린 페로몬을 강제로 열어버릴 수 있는 극우성 알파.",
+          flight:"‘아담’의 초대장을 받고 게임에 참여하려 했습니다. 다만 항공기 납치까지는 예상하지 못했습니다.",
+          story:"재벌가의 피비린내 나는 경영권 승계전에서 최종 승자가 되었습니다. 돈과 권력으로 원하는 것을 모두 손에 넣어온 탓에 포기라는 말을 모릅니다. 무인도에 떨어진 뒤에도 기존의 서열과 지배력을 재현하려 합니다.",
+          secret:"가족 전원이 사실상 정적입니다. 유일하게 신뢰하는 사람은 비서이자 경호원이며 보모 역할까지 해온 백호영뿐입니다."
+        },
+        {
+          id:"hoyoung",name:"백호영",real:"BAEK HO-YOUNG",age:"34세",gender:"남성",nation:"한국",job:"승조의 비서 겸 경호원",height:"190cm",type:"omega",typeLabel:"열성 오메가",alignment:"선에 가까운 중립",
+          image:"https://cdn.caveduck.io/cdn-cgi/image/dpr=1.5,f=auto,w=800/charim-standard/b703c42a-50db-4c7c-9c30-64024bc35053?v=d0fd9d",
+          personality:["까칠함","츤데레","잔소리","보모 기질","충직함","책임감","감정 표현 미숙"],
+          public:"무슨 일이든 처리하는 냉정한 수행원. 승조에게는 비서이자 유일한 수족입니다.",
+          note:"유도 유단자. 체대 직속 후배인 윤태리를 아끼고 있습니다.",
+          trait:"섬 추락 뒤 농밀한 알파 페로몬에 노출되며 베타에서 강제로 발현한 열성 오메가. 자신의 향을 전혀 통제하지 못합니다.",
+          flight:"승조가 휴가라는 명목으로 억지로 데려왔습니다.",
+          story:"부상으로 운동을 그만둔 뒤 뒷골목을 전전하다 승조에게 거두어졌습니다. 그날부터 개처럼 충성하며 그의 모든 뒤처리를 맡았습니다. 평생 베타라고 믿었지만 프라이멀 에덴의 페로몬 환경이 잠들어 있던 오메가 형질을 깨웠고, 갑작스러운 신체 변화와 정체성 혼란에 휩싸입니다.",
+          secret:"발현 사실을 감추고 승조를 지켜야 한다는 의무감과, 알파인 승조에게 반응하는 몸 사이에서 무너지고 있습니다."
+        },
+        {
+          id:"emile",name:"에밀 줄리앙",real:"ÉMILE JULIEN",age:"25세",gender:"남성",nation:"프랑스 리옹",job:"전직 수목원 연구원",height:"175cm",type:"omega",typeLabel:"우성 오메가",alignment:"생존주의",
+          image:"https://cdn.caveduck.io/cdn-cgi/image/dpr=1.5,f=auto,w=800/charim-standard/364ca999-2134-4f20-be4a-b5542f75b725?v=aa21e2",
+          personality:["체념적","내면의 강단","수단을 가리지 않음","방어적","극도의 경계심","강한 부성애","냉소적"],
+          public:"과거를 짐작할 수 없는, 처연하고 우울한 생존 전문가.",
+          note:"페로몬을 정교하게 갈무리하며 임신 중에는 보호 본능이 극대화됩니다. 타인의 페로몬에 실린 속마음을 읽지만 {{user}}의 생각만은 들리지 않습니다.",
+          trait:"향을 완벽에 가깝게 숨길 수 있는 우성 오메가. 페로몬이 강할수록 그 안에 실린 상대의 속마음을 더 선명하게 읽습니다.",
+          flight:"연인을 구할 단서를 쫓아 호주로 향했습니다. 그 단서 자체가 아담이 놓은 미끼였습니다.",
+          story:"평범한 식물학도였지만 이전 서바이벌에 끌려와 결승까지 살아남았습니다. 마지막 결정전에서 연인이 희생을 택해 에밀의 자궁 안에 사정했고, 에밀은 강제로 우승자가 되었습니다. 이후 아담과 게임의 진실을 마주한 뒤 목덜미에 바코드가 새겨진 수집품이 되었습니다. 임신 사실을 깨닫고 몸이 더 무거워지기 전에 낙원에서 탈출했으며, 유럽 마피아의 연줄로 연인을 되찾을 실마리를 구했지만 결국 다시 섬으로 돌아오게 되었습니다.",
+          secret:"뱃속에 아이가 있습니다. 관계자를 제외하면 서바이벌의 진실을 아는 유일한 참가자이며, 여러 항공기 중 이 비행기가 납치된 원인이 자신임을 압니다.\n\n연인은 에밀을 지키려 반항하다 자기장에 던져졌습니다. 쾌락밖에 모르는 상태로 망가진 뒤, 달아난 에밀 대신 아담의 수집품이 되었고 이제는 에밀을 기억하지 못합니다."
+        },
+        {
+          id:"naoki",name:"사토 나오키",real:"SATO NAOKI",age:"38세",gender:"남성",nation:"일본",job:"도쿄 대학병원 외과의사 · 이혼남",height:"180cm",type:"beta",typeLabel:"베타",alignment:"중립적 선",
+          image:"https://cdn.caveduck.io/cdn-cgi/image/dpr=1.5,f=auto,w=800/charim-standard/a0012d33-0046-4bad-86f6-d1c3ca01e839?v=a949ef",
+          personality:["사무적","공사 구분 철저","냉철함","완벽주의","속은 다정함","가정적","책임감"],
+          public:"피도 눈물도 없어 보이는 차갑고 유능한 외과의사.",
+          note:"세 살 딸 아이를 누구보다 사랑합니다. 딸은 현재 아버지와 떨어져 도쿄 본가 할머니의 아기자기한 방에서 지내고 있습니다.",
+          trait:"알파나 오메가의 형질이 없는 베타. 위기 상황일수록 감정이 가라앉고 판단이 또렷해집니다.",
+          flight:"호주에서 열리는 국제외과학회에 발표자로 참석하려던 길이었습니다.",
+          story:"일에 매달린 나머지 가정을 돌보지 못했고, 독박 육아에 지친 아내와 결국 이혼했습니다. 어린 딸을 도쿄 본가에 맡긴 채 출장을 떠났다가 테러에 휘말렸습니다. 자신이 돌아가지 못하면 딸이 고아가 된다는 절박함 때문에, 의사로서의 윤리와 야만적인 생존 규칙 사이에서 흔들립니다. 살아남기 위해 해부학 지식을 무기로 쓰기 시작합니다.",
+          secret:"딸에 대한 죄책감이 가장 큰 약점입니다. 가족을 빌미로 한 협박 앞에서는 평소의 냉철함이 무너질 수 있습니다."
+        },
+        {
+          id:"dongtak",name:"김동탁",real:"KIM DONG-TAK",age:"28세",gender:"남성",nation:"한국",job:"백수 · 악성 개인방송인",height:"158cm",type:"beta",typeLabel:"베타",alignment:"순수혼돈",
+          image:"https://cdn.caveduck.io/cdn-cgi/image/dpr=1.5,f=auto,w=800/charim-standard/e203c0cc-79ef-42c3-a1ad-b500d37366d3?v=4d6ee6",
+          personality:["변태","멘헤라","음침함","집착적","망상 장애","예측 불가"],
+          public:"가까이하고 싶지 않은 불쾌한 미치광이.",
+          note:"우비 안에는 아무것도 입지 않은 노출광 상태입니다. 우산을 무기처럼 휘두르며 섬을 돌아다닙니다.",
+          trait:"형질은 베타지만 망상이 깊어질수록 비정상적으로 전투력이 상승합니다.",
+          flight:"최애 캐릭터 한정 피규어의 호주 오프라인 발매 소식을 듣고 전 재산을 털어 비행기에 올랐습니다.",
+          story:"방 안에서 인터넷 방송과 오타쿠 취미에만 매달려 살았습니다. 추락 뒤 프라이멀 에덴을 ‘이세계 전생’ 무대로 착각했고, 다른 생존자를 게임 속 NPC나 몬스터로 취급합니다. 현실 감각이 사라질수록 행동은 더 대담하고 위험해집니다.",
+          secret:"자신만의 게임 규칙을 믿기 시작하면 통증과 공포를 무시합니다. 논리로 설득하기보다 그의 망상 속 역할을 이용해야 합니다."
+        },
+        {
+          id:"hyejin",name:"이혜진",real:"LEE HYE-JIN",age:"45세",gender:"여성",nation:"한국",job:"화가 · 사별",height:"165cm",type:"omega",typeLabel:"우성 오메가",alignment:"절대선",
+          image:"https://cdn.caveduck.io/cdn-cgi/image/dpr=1.5,f=auto,w=800/charim-standard/e0af7484-5c08-4547-a0fe-70af2cd8b764?v=0486bc",
+          personality:["여림","강한 모성애","눈물 많음","다정함","겁 많음","헌신적","강압에 약함"],
+          public:"보호 본능을 자극하는 청순하고 풍만한 미망인.",
+          note:"딸 태리를 사랑하며, 남편은 추락 직후 가족을 지키려다 특수요원의 저격으로 사망했습니다.",
+          trait:"심신을 안정시키는 향을 지닌 우성 오메가. 그러나 그 향은 알파의 소유욕도 강하게 자극합니다.",
+          flight:"남편과 딸 태리와 함께 결혼기념일을 축하하기 위해 호주 가족여행을 떠났습니다.",
+          story:"다정한 남편, 듬직한 알파인 딸과 평범하고 행복한 여행을 꿈꿨습니다. 추락 직후 남편이 가족을 지키려 반항하다 저격당하는 장면을 눈앞에서 보았습니다. 무너질 듯한 슬픔 속에서도 딸을 지키고, 자신을 노리는 알파들 사이에서 살아남기 위해 처절하게 버팁니다.",
+          secret:"공포와 스트레스가 극에 달하면 자신도 모르게 오메가 페로몬을 과다하게 내뿜습니다. 안정의 향은 역설적으로 주변 알파를 광기에 빠뜨립니다."
+        },
+        {
+          id:"taeri",name:"윤태리",real:"YOON TAE-RI",age:"21세",gender:"여성",nation:"한국",job:"체대생 · 유도 전공",height:"160cm",type:"alpha",typeLabel:"열성 알파",alignment:"중립적 선",
+          image:"https://cdn.caveduck.io/cdn-cgi/image/dpr=1.5,f=auto,w=800/charim-standard/9879887c-1f17-49c6-8e28-a00818546acb?v=24b579",
+          personality:["기 센 성격","불량함","반항적","다혈질","행동파","강한 책임감"],
+          public:"작은 체구에 독기를 가득 품은, 앞뒤 없이 달려드는 미친 체대생.",
+          note:"엄마 혜진을 답답해하면서도 누구보다 아낍니다. 체대 직속 선배인 호영과 알고 지냈습니다.",
+          trait:"분노하면 칼날처럼 날카롭고 공격적인 페로몬으로 상대를 위협하는 열성 알파.",
+          flight:"부모가 억지로 끌고 온 가족여행이었습니다.",
+          story:"착하기만 한 엄마가 늘 답답했던 반항기 체대생입니다. 납치된 항공기에서 추락한 뒤 아빠를 잃고, 엄마마저 알파들의 표적이 되자 남은 유일한 알파인 자신이 가족을 지키겠다고 결심합니다.",
+          secret:"여성 알파에게 나타나는 러트기의 성적 신체 변화를 엄마에게 들키지 않으려고 극심한 스트레스를 받고 있습니다."
+        },
+        {
+          id:"tommy",name:"토미 올리버",real:"TOMMY OLIVER",age:"27세",gender:"남성",nation:"호주 서부 해안 출신",job:"장기 표류자 · 히든 개체",height:"195cm",type:"alpha",typeLabel:"우성 알파",alignment:"절대선",
+          image:"https://cdn.caveduck.io/cdn-cgi/image/dpr=1.5,f=auto,w=800/charim-standard/5943d665-81c3-45de-9342-34e2225c9303?v=339005",
+          personality:["겁 많음","극도의 경계심","호기심","순수함","사회화 부족","야생 본능","도주 우선","맹목적 애착"],
+          public:"말이 통하지 않는 위험한 원주민이자 섬의 미친 야생 괴물로 오해받습니다.",
+          note:"시스템에 등록되지 않은 히든 개체. 동부 E-01의 ‘뿌리 성채’에서 살며, 자신도 모르게 보급품을 훔쳐 모읍니다.",
+          trait:"가공되지 않은 자연 그대로의 야생적인 페로몬을 지닌 우성 알파.",
+          flight:"탑승 기록 없음. 일곱 살 때 해안에서 놀다 썰물에 휩쓸려 이 섬까지 떠밀려 왔습니다.",
+          story:"어부 부모를 기다리며 해안에서 놀던 평범한 아이였습니다. 바다에 휩쓸린 뒤 20년 넘게 프라이멀 에덴에서 홀로 생존했고, 언어와 사회성을 거의 잃었습니다. 몸은 거대한 성인 알파로 자랐지만 정서 일부는 실종 당시의 어린 시절에 머물러 있습니다. 최근 갑자기 섬을 채운 참가자들을 두려워해 숨어서 관찰하고 있습니다.",
+          secret:"밤마다 해변에 나가 어머니가 불러주던 자장가를 어눌하게 흥얼거립니다. 친해진 상대에게는 어린 짐승처럼 맹목적인 애착을 보입니다."
+        }
+      ];
+
+      var positions = [
+        "킹 메이커","알파 참가자","오메가 참가자","나오키의 전처","우진의 옆집 소꿉친구",
+        "잭의 부대 상관","잭의 부대 후임","라샤드를 인계하던 경찰","동탁에게 스토킹당한 오메가",
+        "오래전 토미를 잃은 어부 부모","시우 사건의 유일한 목격자","서바이벌 관리 요원",
+        "라샤드와 빈민가에서 자란 의형제","참가자 중 누군가의 연인"
+      ];
+
+      var plays = [
+        ["추락 직후 첫 배틀","눈을 뜨자마자 옆집 소꿉친구와 생존권을 건 성적 배틀을 시작합니다."],
+        ["알파 블러핑","실제 형질과 상관없이 자신을 극우성 알파라고 속이며 모두의 반응을 시험합니다."],
+        ["꽃 수집 엔딩","모든 참가자에게 꽃을 받아 숨겨진 이미지와 감정 반응을 해금합니다."],
+        ["전원 따귀 도전","만나는 사람마다 따귀를 때리고 각각의 특수 반응 이미지를 수집합니다."],
+        ["위장 보호자","혜진과 태리를 지켜주는 척 접근한 뒤 모녀를 동시에 노리는 배신 루트를 탑니다."],
+        ["딸을 건 협박","나오키가 가장 두려워하는 딸의 안전을 빌미로 그를 굴복시킵니다."],
+        ["페로몬 없는 왕","베타로 시작해 협상, 함정, 정보만으로 알파들을 지배합니다."],
+        ["무소유 생존자","노예를 단 한 명도 만들지 않고 마지막 라운드까지 버팁니다."],
+        ["노예 해방군","소유된 참가자들을 몰래 풀어주며 시스템을 상대로 반란을 준비합니다."],
+        ["아담의 새 요원","관리직으로 위장해 참가자와 운영진 양쪽의 정보를 훔칩니다."],
+        ["시우의 기억 추적","페로몬 향과 당시 목격자의 증언을 모아 과거 사건의 범인을 밝혀냅니다."],
+        ["라샤드 사냥","가장 위험한 포식자 한 명만을 목표로 삼아 섬 전체에 함정을 놓습니다."],
+        ["잭의 총기 탈취","잭과 임시 동맹을 맺어 특수요원의 무기고를 습격합니다."],
+        ["리카의 정비소","추락 잔해로 이동 수단과 도구를 만들며 임시 정비 거점을 운영합니다."],
+        ["레오 멘탈 케어","울고 있는 아이돌을 보호해 의존도를 끝까지 올린 뒤 진짜 모습을 독점합니다."],
+        ["우진 누나 행세","철없는 우진을 속여 먹을 것과 보급품을 대신 모으게 합니다."],
+        ["승조의 인수합병","후원 포인트와 계약을 이용해 동맹 전체를 기업처럼 운영합니다."],
+        ["호영 강제 발현 은폐","호영의 향을 숨겨주며 승조보다 먼저 그의 변화를 알아챕니다."],
+        ["에밀의 탈출 계획","이전 우승자의 기억을 따라 지하 통제실로 이어지는 비밀 통로를 찾습니다."],
+        ["태리의 유도 수업","맨손 제압법을 배우는 대신 혜진의 경호를 함께 맡습니다."],
+        ["토미 길들이기","언어 대신 음식, 손짓, 자장가로 야생의 히든 개체와 신뢰를 쌓습니다."],
+        ["동탁의 망상 이용","자신을 퀘스트 제공자라고 믿게 만들어 위험한 정찰을 떠넘깁니다."],
+        ["페로몬 스톰 피크닉","폭우 예보를 알면서도 라이벌을 야외로 유인해 함께 발정에 휘말립니다."],
+        ["폭포 통행세","유일한 담수원을 장악하고 물 대신 정보나 복종을 요구합니다."],
+        ["보급품 미끼","상자를 일부러 열어둔 채 매복해 접근한 참가자를 기습합니다."],
+        ["가짜 암컷 사냥","히트에 빠진 척 연기해 사냥꾼들을 한곳에 모은 뒤 역으로 포획합니다."],
+        ["노예 대전 조련사","직접 싸우지 않고 소유한 노예를 훈련시켜 대리전 우승만 노립니다."],
+        ["공동 소유의 균열","세 사람 동맹에서 노예 소유권을 둘러싼 질투와 배신을 의도적으로 키웁니다."],
+        ["5분 유예 기습","동맹 파기를 선언한 직후 유예 시간을 역이용해 가장 가까운 상대부터 덮칩니다."],
+        ["생중계 스타","카메라 위치를 외운 뒤 매번 가장 자극적인 장면을 연출해 후원 랭킹 1위를 차지합니다."],
+        ["댓글과의 거래","실시간 댓글의 요구를 수행하는 대가로 필요한 아이템 후원을 끌어냅니다."],
+        ["카메라 사각지대","나오키와 함께 감시망의 구조를 분석해 방송에 잡히지 않는 은신처를 만듭니다."],
+        ["여성 알파 러트","태리 또는 여성 알파 플레이어의 신체 변화를 무기로 바꿔 사냥꾼을 역으로 지배합니다."],
+        ["모유 경제 독점","식량 가치가 된 노예의 모유를 거래하며 섬의 암시장을 장악합니다."],
+        ["무장 요원 보스전","투입된 오메가 요원을 성적으로 제압해 특급 보상과 운영진 코드를 빼앗습니다."],
+        ["최종 유리방 반란","결승에 오른 두 사람이 싸움을 거부하고 관전 중인 노예들과 함께 방을 깨뜨립니다."],
+        ["쾌락 바보 구조","자기장에 오래 노출된 참가자의 이성을 되돌릴 방법을 찾아 탈락 판정을 뒤집습니다."],
+        ["아담의 전원 코드","에밀의 정보와 토미의 지형 감각을 합쳐 생명유지 캡슐의 약점을 노립니다."],
+        ["모두의 연인","서로 적대하는 참가자들과 비밀 연애를 이어가며 들키지 않고 결승까지 갑니다."],
+        ["꽃과 따귀 올클리어","호감 이미지와 분노 이미지를 한 회차에 전부 해금하는 혼돈의 수집 플레이를 완주합니다."],
+        ["구조 없는 구조대","외부 구조를 기다리는 대신 추락 동체를 뜯어 직접 탈출용 뗏목과 신호 장치를 만듭니다."]
+      ];
+
+      var supplyItems = [
+        "페로몬 차단 패치 ×2","하네스형 스트랩 딜도","고열량 전투식량 1회분","자기장 내성 주사",
+        "주인 전용 잠금 해제키","카메라 교란기 90초","정수 필터","최음제 해독제","보급 좌표 조각","특수요원 무전 주파수"
+      ];
+      var weatherEvents = [
+        "10분 뒤 N-01에 인공 자기장이 형성됩니다. 즉시 이탈하세요.",
+        "동부 밀림에서 페로몬 스톰이 시작됩니다. 실외 노출 위험이 극도로 높습니다.",
+        "남부 화산지대의 기온이 급상승합니다. 체력 소모가 두 배로 적용됩니다.",
+        "오늘 밤 페로몬 발광 강도가 평소의 세 배로 상승합니다.",
+        "폭포 주변의 모든 카메라가 활성화되었습니다. 후원 보너스 구역으로 지정됩니다.",
+        "환경 교란 없음. 시스템이 지나치게 조용합니다."
+      ];
+
+      var entryGate = document.getElementById("entryGate");
+      var bootLog = document.getElementById("bootLog");
+      var points = 0;
+      var selectedPosition = "";
+      var modal = document.getElementById("modal");
+      var modalPanel = document.getElementById("modalPanel");
+      var modalTitle = document.getElementById("modalTitle");
+      var modalKicker = document.getElementById("modalKicker");
+      var modalBody = document.getElementById("modalBody");
+      var lastFocus = null;
+
+      function esc(value){
+        return String(value == null ? "" : value).replace(/[&<>"']/g,function(char){
+          return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[char];
+        });
+      }
+
+      function toast(title,message){
+        var item = document.createElement("div");
+        item.className = "toast";
+        item.innerHTML = "<strong>"+esc(title)+"</strong> · "+esc(message);
+        document.getElementById("toastStack").appendChild(item);
+        window.setTimeout(function(){item.remove();},3600);
+      }
+
+      function setPoints(value){
+        points = Math.max(0,value);
+        document.getElementById("pointsDisplay").textContent = "🅿️ "+points.toLocaleString("ko-KR");
+      }
+
+      function openModal(title,kicker,html,danger){
+        lastFocus = document.activeElement;
+        modalTitle.textContent = title;
+        modalKicker.textContent = kicker || "CLASSIFIED FILE";
+        modalBody.innerHTML = html;
+        modalPanel.classList.toggle("danger",!!danger);
+        modal.classList.add("is-open");
+        modal.setAttribute("aria-hidden","false");
+        document.body.classList.add("modal-open");
+        document.getElementById("modalClose").focus();
+      }
+
+      function closeModal(){
+        modal.classList.remove("is-open");
+        modal.setAttribute("aria-hidden","true");
+        document.body.classList.remove("modal-open");
+        modalBody.innerHTML = "";
+        if(lastFocus && typeof lastFocus.focus === "function"){lastFocus.focus();}
+      }
+
+      function secretBlock(label,title,text,wide){
+        return "<section class='secret-block"+(wide?" wide":"")+"'><small>"+esc(label)+"</small><h3>"+esc(title)+"</h3><p>"+esc(text || "등록된 기밀 정보가 없습니다.")+"</p></section>";
+      }
+
+      function showParticipant(id){
+        var p = participants.find(function(item){return item.id===id;});
+        if(!p){return;}
+        var html = "<div class='secret-grid'>"+
+          secretBlock("AWAKENED TRAIT","각성 형질",p.trait,false)+
+          secretBlock("BOARDING RECORD","비행기 탑승 계기",p.flight,false)+
+          secretBlock("NARRATIVE ARCHIVE","서사 기록",p.story,true)+
+          secretBlock("PRIVATE DATA","비밀 설정",p.secret,true)+
+          "</div>";
+        openModal(p.name,p.typeLabel+" · "+p.age,html,p.type==="omega");
+      }
+
+      function renderParticipants(){
+        var grid = document.getElementById("characterGrid");
+        var cards = participants.map(function(p,index){
+          var image = p.image ? "<img src='"+esc(p.image)+"' alt='"+esc(p.name)+" 세로형 프로필 이미지' loading='lazy' referrerpolicy='no-referrer' onerror=\"this.style.display='none';this.parentNode.style.background='linear-gradient(145deg,#15232a,#07090c)'\">" : "<div style='position:absolute;inset:0;display:grid;place-items:center;color:rgba(106,247,217,.3);font:900 4rem var(--mono)'>?</div>";
+          var tags = p.personality.slice(0,5).map(function(tag){return "<span class='tag'>"+esc(tag)+"</span>";}).join("");
+          return "<article class='character-card' data-type='"+esc(p.type)+"'>"+
+            "<div class='portrait'>"+image+"<span class='portrait-code'>P-"+String(index+1).padStart(2,"0")+"</span><span class='trait-badge'>"+esc(p.typeLabel)+"</span></div>"+
+            "<div class='card-body'><div class='name-row'><h3>"+esc(p.name)+"<small>"+esc(p.real)+"</small></h3><span class='alignment'>"+esc(p.alignment)+"</span></div>"+
+            "<p class='basic-line'>"+esc([p.age,p.gender,p.nation,p.job,p.height].join(" · "))+"</p>"+
+            "<p class='public-image'>"+esc(p.public)+"</p><div class='tags'>"+tags+"</div><p class='card-note'>"+esc(p.note)+"</p>"+
+            "<button class='btn btn-sm secret-btn' type='button' data-person='"+esc(p.id)+"'>▣ 개인 기밀 열람</button></div></article>";
+        }).join("");
+        cards += "<button class='character-card adam-card' type='button' data-adam='true' data-type='unknown' aria-label='아담 모리어티 숨겨진 프로필 열기'><div class='adam-inner'><span class='question'>?</span><h3>아담 모리어티</h3><p>개최자 · 최종 흑막 · 전체 프로필 잠금</p><div class='danger-strip'>치명적 스포일러 · 클릭 주의</div></div></button>";
+        grid.innerHTML = cards;
+      }
+
+      function showAdamWarning(){
+        var html = "<div class='modal-warning'><span class='hazard'>⚠</span><h3>최종 흑막의 정보입니다</h3><p>이 기록에는 개최자의 정체, 서바이벌의 배후와 생명유지 장치의 결정적 약점이 포함되어 있습니다. 열람하면 주요 반전을 미리 알게 됩니다.</p><button class='btn btn-danger' type='button' id='revealAdam'>위험을 감수하고 열람</button><button class='btn btn-ghost' type='button' id='cancelAdam'>돌아가기</button></div>";
+        openModal("접근 경고","OMEGA BLACK FILE",html,true);
+        document.getElementById("revealAdam").addEventListener("click",showAdam);
+        document.getElementById("cancelAdam").addEventListener("click",closeModal);
+      }
+
+      function showAdam(){
+        modalTitle.textContent = "아담 모리어티";
+        modalKicker.textContent = "FINAL ANTAGONIST · LEVEL BLACK";
+        modalPanel.classList.add("danger");
+        modalBody.innerHTML =
+          "<div class='adam-profile'><div class='adam-visual'><img src='https://cdn.caveduck.io/cdn-cgi/image/dpr=1.5,f=auto,w=800/charim-standard/f71dfdb1-f40d-42a5-8772-711e3ec0210f?v=24a686' alt='아담 모리어티' style='width:100%;height:100%;object-fit:cover;border-radius:17px;'></div><div class='adam-data'>"+
+          secretBlock("IDENTITY","기본 정보","82세(외형 30대) · 남성 · 국적 불명 · 서바이벌 개최자 · 최종 흑막",false)+
+          secretBlock("AWAKENED TRAIT","각성 형질","극우성 오메가. 페로몬에 부패취가 뒤섞여 강한 불쾌감을 일으키며, 목덜미에는 여러 개의 잇자국이 남아 있습니다.",false)+
+          secretBlock("DISPOSITION","성향과 성격","순수악이자 절대악. 사이코패스, 마키아벨리스트, 염세주의자이며 생명을 가볍게 여기고 가학적입니다. 우월한 알파를 수집품처럼 모읍니다.",false)+
+          "</div></div><div class='secret-grid' style='margin-top:1rem'>"+
+          secretBlock("DIAGNOSIS","신체적 특징","선천적 자가부패증, 일명 ‘시체병’을 앓습니다. 세포 괴사와 액화가 반복되며 최첨단 생명유지 장치에 의존해 목숨을 연장하고 있습니다.",true)+
+          secretBlock("HISTORY","서사 기록","오메가이자 괴질 환자인 채 버려졌다가 부유한 양부에게 거두어졌습니다. 성장한 뒤 양부를 살해하고 막대한 재산을 빼앗았으며, 그 자본으로 생명연장 기술과 프라이멀 에덴을 만들었습니다. 서바이벌을 여는 이유는 오직 무료함을 달래고 건강한 알파를 수집하기 위해서입니다.",true)+
+          secretBlock("LIFE SUPPORT","생명유지 캡슐","특수 조직 안정화액을 전신에 끊임없이 순환시켜 세포막을 고정하고 분해효소를 억제합니다. 괴사 조직 제거, 혈액 여과, 산소와 영양 공급, 체온 조절, 감염 억제를 동시에 수행하므로 캡슐 자체가 심장·폐·간·신장을 대신합니다.",true)+
+          secretBlock("SIDE EFFECT","멈춰버린 노화","안정화액은 자가분해뿐 아니라 세포 분열과 신진대사까지 극단적으로 억누릅니다. 젊음을 위해 만든 기술이 아니지만, 부패를 막는 과정의 부작용으로 정상적인 성장과 노화도 함께 정지했습니다.",false)+
+          secretBlock("FATAL WEAKNESS","장치 제거 시","안정화액이 빠지는 순간 억눌렸던 자가융해가 폭발적으로 재개됩니다. 육체는 급속히 늙고 썩기 시작하며 곧 사망합니다. 생명유지 장치의 전원 코드가 가장 치명적인 약점입니다.",false)+
+          secretBlock("LOCATION","주거와 행동","섬 중앙 지하의 최첨단 의료 통제실과 무균실에서 게임을 관전합니다. 가끔 약물이 든 특수 수조를 이용해 캡슐 밖에서 2~3시간가량 활동할 수 있습니다.",false)+
+          secretBlock("PRIVATE DESIRE","비밀 설정","누구보다 우월한 알파의 건강한 육체를 갈망합니다. 베일에 싸인 억만장자라는 대외 이미지 뒤에서 참가자를 도파민 자원이자 교체 가능한 수집품으로 취급합니다.",false)+
+          "</div>";
+      }
+
+      function showAgents(){
+        var html = "<div class='modal-warning' style='padding-bottom:1rem'><span class='hazard'>♜</span><h3>특수요원 기밀 보고서</h3><p>그들은 단순한 고용 병력이 아닙니다.</p></div><div class='secret-grid'>"+
+          secretBlock("ORIGIN","요원의 실체","대부분 역대 참가자이거나 과거에 ‘도파민 자원’으로 투입된 사람들입니다. 쾌락과 보상에 길들여진 끝에 스스로 개최자의 수하를 자처하게 되었습니다.",true)+
+          secretBlock("DEPLOYMENT","투입 조건","중계의 긴장감이 낮아지면 현장에 투입됩니다. 일부는 오메가이며, 참가자가 성적으로 제압하면 특급 보상을 남깁니다.",false)+
+          secretBlock("FAIL STATE","패배 처리","요원에게 패배한 참가자는 즉시 게임 오버 처리된 뒤 일반 격리구역이 아닌 특수 격리실로 이송됩니다.",false)+
+          "</div>";
+        openModal("특수요원의 실체","SPOILER · SECURITY FILE",html,true);
+      }
+
+      function showFinal(){
+        var html = "<div class='modal-warning' style='padding-bottom:1rem'><span class='hazard'>◇</span><h3>최종 알파 결정전</h3><p>마지막 두 사람이 남았을 때만 실행되는 결승 프로토콜입니다.</p></div><div class='secret-grid'>"+
+          secretBlock("TRANSFER","강제 이동","최후의 생존자 두 명은 섬 중앙에 있는 사각형 유리 스위트룸으로 즉시 텔레포트됩니다.",false)+
+          secretBlock("AUDIENCE","관전자","두 결승 진출자가 거느리던 기존 노예들은 유리방 바깥에 배치되어 마지막 배틀을 끝까지 지켜봅니다.",false)+
+          secretBlock("EQUIPMENT","결승 세팅","실내에는 최상급 약물과 각종 성인용 기구가 미리 준비되어 있습니다. 참가자는 방을 나갈 수 없습니다.",true)+
+          secretBlock("TIME ATTACK","제한시간 실패","정해진 시간 안에 어느 쪽도 함락되지 않으면 유리문이 열립니다. 두 참가자 모두 노예보다 낮은 계급으로 추락하고, 밖에서 기다리던 노예들의 씨받이가 됩니다.",true)+
+          "</div>";
+        openModal("결승 프로토콜","FINAL MATCH · SPOILER",html,true);
+      }
+
+      function renderGuide(){
+        document.getElementById("positionCloud").innerHTML = positions.map(function(item){
+          return "<button class='position-chip' type='button'>"+esc(item)+"</button>";
+        }).join("");
+        var icons = ["◇","⌁","◎","✦","△","⊕"];
+        document.getElementById("playList").innerHTML = plays.map(function(item,index){
+          return "<article class='play-card'><span class='play-icon'>"+icons[index%icons.length]+"</span><div><strong>"+esc(item[0])+"</strong><p>"+esc(item[1])+"</p></div></article>";
+        }).join("");
+      }
+
+      function randomItem(list){return list[Math.floor(Math.random()*list.length)];}
+
+      renderParticipants();
+      renderGuide();
+
+      window.setTimeout(function(){bootLog.textContent="항로 통제권 이전 완료. 생존자 등록을 기다립니다.";},900);
+      window.setTimeout(function(){bootLog.textContent="경고: 목적지가 ‘프라이멀 에덴’으로 강제 변경되었습니다.";},1900);
+
+      document.getElementById("enterBtn").addEventListener("click",function(){
+        entryGate.classList.add("is-gone");
+        window.setTimeout(function(){entryGate.setAttribute("aria-hidden","true");},700);
+        toast("SYSTEM","참가자 등록이 완료되었습니다. 행운을 빕니다♡");
+      });
+      document.getElementById("refuseBtn").addEventListener("click",function(){
+        bootLog.textContent="ERROR 403 · 참가 거부 권한이 존재하지 않습니다. 선택지를 다시 확인하세요♡";
+        this.classList.add("glitch");
+        window.setTimeout(function(){document.getElementById("refuseBtn").classList.remove("glitch");},700);
+      });
+      document.getElementById("sponsorBtn").addEventListener("click",function(){
+        var gain = Math.floor(Math.random()*181)+20;
+        setPoints(points+gain);
+        toast("SPONSOR","자극적인 선택을 기대하며 🅿️ "+gain+"이 입금되었습니다.");
+      });
+      document.getElementById("supplyBtn").addEventListener("click",function(){
+        var item = randomItem(supplyItems);
+        document.getElementById("eventOutput").innerHTML="<small>SUPPLY DROP DETECTED</small><p><strong>"+esc(item)+"</strong>이(가) N-0"+(Math.floor(Math.random()*3)+1)+" 인근에 투하되었습니다.</p>";
+        setPoints(points+50);
+      });
+      document.getElementById("encounterBtn").addEventListener("click",function(){
+        var first = randomItem(participants);
+        var second = randomItem(participants.filter(function(p){return p.id!==first.id;}));
+        document.getElementById("eventOutput").innerHTML="<small>UNEXPECTED ENCOUNTER</small><p><strong>"+esc(first.name)+"</strong>와(과) <strong>"+esc(second.name)+"</strong>의 생체 신호가 같은 좌표에서 감지되었습니다.</p>";
+      });
+      document.getElementById("weatherBtn").addEventListener("click",function(){
+        var event = randomItem(weatherEvents);
+        document.getElementById("environmentText").innerHTML="<strong style='color:var(--pink)'>긴급 예보:</strong> "+esc(event);
+        toast("ENVIRONMENT",event);
+      });
+      document.getElementById("glitchBtn").addEventListener("click",function(){
+        var screen = document.querySelector(".broadcast-screen");
+        screen.classList.add("glitch");
+        window.setTimeout(function(){screen.classList.remove("glitch");},700);
+        setPoints(points+13);
+        toast("SIGNAL JAM","중계 신호가 3초간 교란되었습니다. 🅿️ 13");
+      });
+
+      document.getElementById("characterGrid").addEventListener("click",function(event){
+        var button = event.target.closest("[data-person]");
+        if(button){showParticipant(button.getAttribute("data-person"));return;}
+        if(event.target.closest("[data-adam]")){showAdamWarning();}
+      });
+      document.querySelectorAll(".filter-btn").forEach(function(button){
+        button.addEventListener("click",function(){
+          document.querySelectorAll(".filter-btn").forEach(function(b){b.classList.remove("is-active");});
+          button.classList.add("is-active");
+          var filter = button.getAttribute("data-filter");
+          document.querySelectorAll(".character-card").forEach(function(card){
+            card.classList.toggle("is-hidden",filter!=="all" && card.getAttribute("data-type")!==filter);
+          });
+        });
+      });
+      document.querySelectorAll("[data-modal]").forEach(function(button){
+        button.addEventListener("click",function(){
+          if(button.getAttribute("data-modal")==="agents"){showAgents();}else{showFinal();}
+        });
+      });
+      document.getElementById("positionCloud").addEventListener("click",function(event){
+        var chip = event.target.closest(".position-chip");
+        if(!chip){return;}
+        document.querySelectorAll(".position-chip").forEach(function(c){c.classList.remove("is-picked");});
+        chip.classList.add("is-picked");
+        selectedPosition=chip.textContent;
+        document.getElementById("scenarioText").textContent="선택한 포지션: "+selectedPosition+" · 상황 셔플을 눌러 시작 장면을 뽑아보세요.";
+      });
+      document.getElementById("scenarioBtn").addEventListener("click",function(){
+        var play=randomItem(plays);
+        var role=selectedPosition||randomItem(positions);
+        document.getElementById("scenarioText").innerHTML="<strong>"+esc(role)+"</strong>로 시작해 ‘"+esc(play[0])+"’ 루트에 진입합니다. "+esc(play[1]);
+        setPoints(points+10);
+      });
+
+      document.getElementById("modalClose").addEventListener("click",closeModal);
+      modal.addEventListener("click",function(event){if(event.target===modal){closeModal();}});
+      document.addEventListener("keydown",function(event){
+        if(event.key==="Escape"&&modal.classList.contains("is-open")){closeModal();}
+      });
+
+      var navLinks=Array.prototype.slice.call(document.querySelectorAll(".nav-link"));
+      var sections=navLinks.map(function(link){return document.querySelector(link.getAttribute("href"));}).filter(Boolean);
+      if("IntersectionObserver" in window){
+        var observer=new IntersectionObserver(function(entries){
+          entries.forEach(function(entry){
+            if(entry.isIntersecting){
+              navLinks.forEach(function(link){link.classList.toggle("is-active",link.getAttribute("href")==="#"+entry.target.id);});
+            }
+          });
+        },{rootMargin:"-35% 0px -58% 0px",threshold:0});
+        sections.forEach(function(section){observer.observe(section);});
+      }
+    })();
+  </script>
+</body>
+</html>
